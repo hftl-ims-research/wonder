@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>Wonder GUI</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- used to start like an app with google chrome on android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Bootstrap Layout // loading default Stylesheet in 'js/main.js' -->
+    <link id="pagestyle" href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Stylesheet -->
+    <link id="pagestyle" href="css/style.css" rel="stylesheet" type="text/css" />
+
+    <!-- jQuery -->
+    <script src="js/jquery-1.7.1.min.js"></script>
+
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- localstorage -->
+    <script src="js/localstorage.js"></script>
+
+    <!-- Bootstrap Wysiwyg-Text Area -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-wysihtml5-0.0.2.css"></link>
+    <script src="js/wysihtml5-0.3.0_rc2.min.js"></script>
+    <script src="js/bootstrap-wysihtml5-0.0.2.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        var loginName;
+        var TURN = {
+            url: "turn:150.140.184.242:3478",
+            username: "wonder",
+            credential: "w0nd3r"
+        };
+        var STUN = {
+            url: "stun:150.140.184.242:3478"
+        };
+        iceServers = {
+            "iceServers": [STUN, TURN]
+        };
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-static-top navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">WONDER</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navigation">
+                <ul class="nav navbar-nav navbar-left">
+                    <!-- login-form -->
+                    <form class="navbar-form navbar-left " role="search" id="login">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="user@example.com" id="loginText" value="vasco@asterisk.wonder" autofocus>
+                                <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" focus id="loginButton">Login <span class="glyphicon glyphicon-log-in"></span>
+                                </button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="navbar-form navbar-left after_login hidden" id="logout">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <button class="btn btn-link disabled" role="button">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <i class="text" id="status"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger" id="logout_btn">Logout <span class="glyphicon glyphicon-log-out"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /.login-form -->
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right after_login hidden">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" id="contact_btn"><span class="glyphicon glyphicon-book"></span> Contacts <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" id="contact_list">
+                            <li><a class="add_contact"><span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-user"></span> <span class="text" >Kontakt hinzufügen</span></a>
+                                <li class="divider"></li>
+                        </ul>
+                        </li>
+                        <!-- calling-form -->
+                        <form class="navbar-form navbar-left after_login hidden" role="search">
+
+                            <input type="text" class="form-control" autofocus id="callTo" placeholder="user@example.com">
+                            <div class="btn-group">
+                                <button id="voice_call_btn" type="button" class="btn btn-success call_btn "><span class="glyphicon glyphicon-earphone"></span>
+                                </button>
+                                <button id="video_call_btn" type="button" class="btn btn-success call_btn "><span class="glyphicon glyphicon-facetime-video"></span>
+                                </button>
+                            </div>
+
+                            <button id="open_chat_btn" type="button" class="btn btn-default ">Chat <span class="glyphicon glyphicon-comment"></span>
+                            </button>
+
+                        </form>
+                        <!-- /.calling-form -->
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- webrtc_tabs -->
+    <ul class="nav nav-tabs nav-justified hidden after_login" role="tablist" id="conversation_tabs">
+        <li class="item active">
+            <a href="#">
+                <button type="button" class="close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                Connection1
+            </a>
+        </li>
+        <li class="item">
+            <a href="#">
+                <button type="button" class="close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                Connection2
+            </a>
+        </li>
+        <li class="item">
+            <a href="#">
+                <button type="button" class="close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                Connection3
+            </a>
+        </li>
+        <li class="item">
+            <a href="#">
+                <button type="button" class="close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                Connection4
+            </a>
+        </li>
+    </ul>
+    <span class="help-block"></span>
+    <!-- /.webrtc_tabs -->
+
+    <div class="jumbotron" id="welcome_div">
+        <h1>Welcome to WONDER GUI!</h1>
+        <p>This is a page for testing the WONDER Javascript framework, which uses Signaling-On-The-Fly for intercommunication between WebRTC Providers.</p>
+        <p>Please log on to your domain to use this service.</p>
+        <button type="button" class="btn btn-link disabled btn-lg btn-block">
+            <span class="glyphicon glyphicon-earphone"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-facetime-video"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-comment"></span>
+        </button>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- video container -->
+            <div class="col-md-9 col-sm-12">
+
+
+                <div class="panel panel-primary hidden" id="video_container">
+                    <div class="panel-heading">
+                        John Doe
+                        <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                    </div>
+                    <div class="panel-body">
+                        <div class="embed-responsive embed-responsive-4by3">
+                            placeholder for video content:
+                            <div id="card" ondblclick="">
+                                <div id="local" style="margin-left:0px;">
+                                    <video id="remoteVideo" autoplay="autoplay" muted="true" width="100%"></video>
+                                </div>
+                                <div id="remote">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.video container -->
+            <div class="col-md-3 col-sm-12">
+                <div class="row">
+                    <!-- own_video container -->
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary btn-lg btn-block hidden" id="show_own_video">Show own picture</button>
+                        <span class="help-block"></span>
+                        <div class="panel panel-primary hidden" id="own_video_container">
+                            <div class="panel-heading">
+                                Me
+                                <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    placeholder for the own video:
+                                    <video id="localVideo" autoplay="autoplay" muted="true" width="100%"></video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.own_video container -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- chat container -->
+
+                        <div class="panel panel-primary hidden" id="chat">
+                            <div class="panel-heading">
+                                <span class="glyphicon glyphicon-comment"></span> Chat
+                                <button type="button" class="close"><span aria-hidden="true"><span class="glyphicon glyphicon-collapse-up"></span></span><span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <ul class="list-group" id="textChat">
+                                <li class="list-group-item">
+                                    <p><span class="label label-primary">User1</span> Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                        <br>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                        <br>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                        <br>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    </p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p><span class="label label-success">User2</span> A second message.
+                                    </p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p><span class="label label-success">User2</span> And a third message.
+                                    </p>
+                                </li>
+                            </ul>
+                            <div class="panel-footer">
+                                <form class="form-inline" role="form">
+                                    <textarea class="form-control" rows="3" style="width:100%;" id="datachannelmessage" placeholder="Please enter your message"></textarea>
+                                    <span class="help-block"></span>
+                                    <div class="form-group">
+                                        <button type="file" class="btn btn-primary" id="send_message">Send <span class="glyphicon glyphicon-send"></span>
+                                        </button>
+                                        <span id="fileSharing">
+                                            <input type="file" id="fileInput" class="hidden" type="file" accept="media_type">
+                                        <button type="button" class="btn btn-default" id="attach_file" onclick="$('#fileInput').click();"><span class="glyphicon glyphicon-paperclip"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default" id="refresh_chat"><span class="glyphicon glyphicon-refresh"></span>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.chat container -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalInvite" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Receiving</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="receivingModal"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="AcceptButton">Accept</button>
+                    <button class="btn btn-success" id="RejectButton">Reject</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal Cancel-->
+    <div class="modal fade" id="modalInviting" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Call</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span id="callingModal">Calling...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="CancelButton">Hang up</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal Cancel-->
+    <div class="modal fade" id="modalAdContact" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add a new contact</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input_login_name">Name</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="input_login_name" placeholder="Doe">
+                            </div>
+                            <label class="col-sm-2 control-label" for="input_login_surname">Surname</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="input_login_surname" placeholder="John">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input_logindata">Login</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="input_logindata" placeholder="mail@example.com">
+                            </div>
+                        </div>
+                    </form>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="modal_add_contact_btn"><span class="glyphicon glyphicon-plus"></span> Add</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <!-- Buttons, view, etc. -->
+    <script src="js/modules.js"></script>
+
+    <script src="js/notify.js"></script>
+
+    <script src="js/libs/adapter.js"></script>
+
+    <script src="js/libs/Resource.js"></script>
+    <script src="js/libs/DataBroker.js"></script>
+    <script src="js/libs/DataMessage.js"></script>
+    <script src="js/libs/Codec.js"></script>
+    <script src="js/libs/Message.js"></script>
+    <script src="js/libs/Identity.js"></script>
+    <script src="js/libs/Enums.js"></script>
+    <script src="js/libs/helpfunctions.js"></script>
+    <script src="js/libs/Conversation.js"></script>
+    <script src="js/libs/Participant.js"></script>
+    <script src="js/libs/Idp.js"></script>
+    <script src="js/libs/MessageFactory.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/libs/MessagingStub.js"></script>
+    <!--<script src="js/libs/Idp_options.js"></script>-->
+
+</body>
+
+</html>
