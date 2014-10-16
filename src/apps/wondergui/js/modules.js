@@ -1,9 +1,16 @@
 //LOAD CONTACTS
+$('#contact_btn').click( function () {
+    $('#contact_list').empty();
+    $('#contact_list').append('<li><a id="add_contact"><span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-user"></span> <span class="text" >Kontakt hinzufügen</span></a></li><li class="divider"></li>');
+    // contact handling
+    $('#add_contact').click(function (){
+        $('#modalAdContact').modal();
+    });
     var contacts = contact.getAll();
     $.each(contacts, function(i, item) {
-    $('#contact_list').append('<li><a><span class="text" value="'+contacts[i].logindata+'">'+contacts[i].name+', '+contacts[i].surname+'</span> <span class="label label-success">online</span></a>');
+        $('#contact_list').append('<li><a><span class="text" value="'+contacts[i].logindata+'">'+contacts[i].name+', '+contacts[i].surname+'</span> <span class="label label-success">online</span></a>');
     });
-
+});
 
 //show modules
 showModule = {
@@ -93,16 +100,12 @@ function showChatwindow() {
 /*the following functions are called after the DOM is ready: */
 $(document).ready(function () {
 
-    // contact handling
-    $('.add_contact').click(function (){
-        $('#modalAdContact').modal();
-    });
     $('#contact_list li a .text').click(function (evt) {
         var selected_contact = $(this).attr("value");
         $("#callTo").val(selected_contact);
     });
     $('#modal_add_contact_btn').click(function (){
-        contact.store($('input_login_name').val(),$('input_login_surname').val(),$('input_logindata').val());
+        contact.store($('#input_login_name').val(),$('#input_login_surname').val(),$('#input_logindata').val());
         $('#modalAdContact').modal('hide');
     });
 
