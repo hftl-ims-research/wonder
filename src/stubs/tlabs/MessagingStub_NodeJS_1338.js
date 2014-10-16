@@ -1,26 +1,26 @@
 /*********************************************************************************
- * Messaging Stub Class 
+ * Messaging Stub Class
  * For websocket
  */
-function MessagingStub_NodeJS() {
+function MessagingStub_NodeJS_1338() {
 	this.ownRtcIdentity;
 	this.credentials;
 	this.websocket;
-    
+
     this.conversations=new Array();
 }
 
 /**
  * SendMessage
- * @param message... Message 
+ * @param message... Message
  */
-MessagingStub_NodeJS.prototype.sendMessage = function (message) {
+MessagingStub_NodeJS_1338.prototype.sendMessage = function (message) {
     console.log("C->S: ", message);
     var full_message = new Object();
     full_message.type = "message";
     full_message.body = message;
 
-    
+
     // Multicast support for INVITE and UPDATE
     if ((message.type == MessageType.INVITATION || message.type == MessageType.UPDATE) && message.body.peers) {
         this.conversations.forEach(function (element, index, array) {
@@ -31,7 +31,7 @@ MessagingStub_NodeJS.prototype.sendMessage = function (message) {
         conversation.peers = message.body.peers;
         this.conversations.push(conversation);
     }
-    
+
     // Multicast support if to is empty
     if (!message.to) {
         var peers;
@@ -68,12 +68,12 @@ MessagingStub_NodeJS.prototype.sendMessage = function (message) {
 /**
  * Connect
  */
-MessagingStub_NodeJS.prototype.connect = function(ownRtcIdentity, credentials, callbackFunction) {
+MessagingStub_NodeJS_1338.prototype.connect = function(ownRtcIdentity, credentials, callbackFunction) {
 	this.ownRtcIdentity = ownRtcIdentity;
 	this.credentials = credentials;
 
 	//DEFINE THE HOST ADDR
-	var signaling_server = "127.0.0.1:1337";
+	var signaling_server = "127.0.0.1:1338";
 	//signaling_server="172.16.62.66:1337";
 	//signaling_server = "150.140.184.247:1337";
 
@@ -110,7 +110,7 @@ MessagingStub_NodeJS.prototype.connect = function(ownRtcIdentity, credentials, c
 	this.websocket.onmessage = function(full_message) {
 		// IF it doesnt have contextID, it is the application.
 		var message = JSON.parse(full_message.data).body;
-        
+
 		Idp.getInstance().createIdentity(message.from, function(identity) {
 			message.from = identity;
 
@@ -127,7 +127,7 @@ MessagingStub_NodeJS.prototype.connect = function(ownRtcIdentity, credentials, c
 /**
  * Disconnects from the server.
  */
-MessagingStub_NodeJS.prototype.disconnect = function() {
+MessagingStub_NodeJS_1338.prototype.disconnect = function() {
 	this.websocket.close();
 	this.websocket = null;
 	console.log("Websocket connection disconnected");
