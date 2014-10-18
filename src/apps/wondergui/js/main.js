@@ -137,6 +137,8 @@ document.onreadystatechange = function(){
  */
     function doIndividualCall(type) {
         peers = seePersonsToCall(document.getElementById('callTo').value);
+        alert(peers);
+
         if(!peers){
             alert("All the identities must be from the same domain to do a Multiparty Conversation!")
         } else{
@@ -177,31 +179,28 @@ document.onreadystatechange = function(){
 function initialize() {
     /** HTML related code */
     var_init();
-    /*  Hide login form and get login name */
-    //document.getElementById('login').style.visibility = 'hidden';
-    //document.getElementById('videoContainer').style.visibility = 'visible';
-    //document.getElementById('call').style.visibility = 'visible';
-    //document.getElementById('chat').style.visibility = 'visible';
-    //document.getElementById('updateConversation').style.visibility = 'visible';
 
+    myRtcIdentity = $('#loginText').val();
 
-    if (document.getElementById('loginText').value != ""){
+    if (myRtcIdentity != ""){
         //myRtcIdentity = document.getElementById('loginText').value + "@vertx.wonder";
-        myRtcIdentity = document.getElementById('loginText').value;
         login.setData(myRtcIdentity);
         (function (){
             hideModule.login();
         })();
     }
     /* Initialize the video elements and status */
+
+
+
     console.log('Initializing...');
+
     card = document.getElementById('card');
     localVideo = document.getElementById('localVideo');
     miniVideo = document.getElementById('miniVideo');
     remoteVideo = document.getElementById('remoteVideo');
 
     resetStatus();
-
     setStatus(myRtcIdentity);
 
 
@@ -239,7 +238,8 @@ function doCall() {
     $('#modalInviting').modal('show');
 
     conversation.open(peers, constraints, invitation, function(){}, function(){});
-    conversation.open(peers, constraints, invitation, function(){}, function(){});
+
+
 }
 
 function hangup(){
@@ -389,8 +389,8 @@ function onMessage(message) {
             {
                 /*  Create new conversation */
             Acceptbtn.onclick = function(){
-                document.getElementById('hangup').style.visibility = 'visible';
-                document.getElementById('call').style.visibility = 'hidden';
+                //document.getElementById('hangup').style.visibility = 'visible';
+                //document.getElementById('call').style.visibility = 'hidden';
                 for(var i=0; i< message.body.constraints.length; i++){
                     if(message.body.constraints[i].type == 'andudioVideo')
                         document.getElementById('updateConversation').style.visibility = 'hidden';
@@ -640,7 +640,8 @@ function seePersonsToCall(string){
     var permit = true;
     for(var i =0; i < peerstocall.length; i++){
         if(peerstocall[i].split("@").length == 1){
-            peersFinal.push(peerstocall[i] + "@vertx.wonder");
+            peersFinal.push(peerstocall[i] + "");
+            //peersFinal.push(peerstocall[i] + "@vertx.wonder");
         }
         else{
             if(peerstocall[i].split("@")[1] != myRtcIdentity.split("@") && peerstocall.length > 1)

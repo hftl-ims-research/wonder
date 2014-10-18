@@ -74,7 +74,7 @@
                     <form class="navbar-form navbar-left " role="search" id="login">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="user@example.com" id="loginText" value="vasco@asterisk.wonder" autofocus>
+                                <input type="text" class="form-control" placeholder="username@nodejs.wonder" id="loginText"  value="testuser1@nodejs.wonder" autofocus>
                                 <span class="input-group-btn">
                             <button type="button" class="btn btn-primary" focus id="loginButton">Login <span class="glyphicon glyphicon-log-in"></span>
                                 </button>
@@ -107,7 +107,7 @@
                         <!-- calling-form -->
                         <form class="navbar-form navbar-left after_login hidden" role="search">
 
-                            <input type="text" class="form-control" autofocus id="callTo" placeholder="user@example.com">
+                            <input type="text" class="form-control" autofocus id="callTo" placeholder="username@nodejs.wonder">
                             <div class="btn-group">
                                 <button id="voice_call_btn" type="button" class="btn btn-success call_btn "><span class="glyphicon glyphicon-earphone"></span>
                                 </button>
@@ -360,7 +360,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input_logindata">Login</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="input_logindata" placeholder="mail@example.com">
+                                <input type="email" class="form-control" id="input_logindata" placeholder="username@nodejs.wonder">
                             </div>
                         </div>
                     </form>
@@ -386,21 +386,27 @@
 
     <script src="js/libs/adapter.js"></script>
 
-    <script src="js/libs/Resource.js"></script>
-    <script src="js/libs/DataBroker.js"></script>
-    <script src="js/libs/DataMessage.js"></script>
-    <script src="js/libs/Codec.js"></script>
-    <script src="js/libs/Message.js"></script>
-    <script src="js/libs/Identity.js"></script>
-    <script src="js/libs/Enums.js"></script>
-    <script src="js/libs/helpfunctions.js"></script>
-    <script src="js/libs/Conversation.js"></script>
-    <script src="js/libs/Participant.js"></script>
-    <script src="js/libs/Idp.js"></script>
-    <script src="js/libs/MessageFactory.js"></script>
+
     <script src="js/main.js"></script>
-    <script src="js/libs/MessagingStub.js"></script>
-    <!--<script src="js/libs/Idp_options.js"></script>-->
+
+        <script src="js/notify.js"></script>
+        <!-- Load the polyfill to switch-hit between Chrome and Firefox -->
+        <script src="../../libs/adapter.js"></script>
+
+        <script src="../../libs/Resource.js"></script>
+        <script src="../../libs/DataBroker.js"></script>
+        <script src="../../libs/DataMessage.js"></script>
+        <script src="../../libs/Codec.js"></script>
+        <script src="../../libs/Message.js"></script>
+        <script src="../../libs/Identity.js"></script>
+        <script src="../../libs/Enums.js"></script>
+        <script src="../../libs/helpfunctions.js"></script>
+        <script src="../../libs/Conversation.js"></script>
+        <script src="../../libs/Participant.js"></script>
+        <script src="../../libs/Idp.js"></script>
+        <script src="../../libs/MessageFactory.js"></script>
+        <script src="../../libs/MessagingStub.js"></script>
+        <script src="../../settings/domain.js"></script>
 
 </body>
 

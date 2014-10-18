@@ -25,6 +25,9 @@ showModule = {
     chat: function () {
         $('#open_chat_btn').addClass("active btn-primary");
         showChatwindow();
+    },
+    start : function () {
+        $('#welcome_div').fadeIn('slow').removeClass('hidden');
     }
 }
 
@@ -55,13 +58,16 @@ hideModule = {
         hideModule.chat();
     },
     all: function () {
-        $('#welcome_div').fadeIn('slow').removeClass('hidden');
         hideModule.avc();
+        showModule.start();
+    },
+    start: function () {
+        $('#welcome_div').fadeOut('slow').addClass('hidden');
     },
     login: function () {
         $('#login').addClass("hidden");
         $('.after_login').fadeIn("slow").removeClass("hidden");
-        $('#welcome_div').fadeOut('slow').addClass('hidden');
+        hideModule.start();
         $("callTo").focus();
     }
 }
