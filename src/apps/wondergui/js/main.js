@@ -508,8 +508,7 @@ function onRTCEvt(event, evt) {
         //document.getElementById('updateConversation').style.visibility = 'visible';
         //document.getElementById('hangup').style.visibility = 'visible';
         for(var i=0; i< constraints.length; i++){
-            if(constraints[i].type == 'audioVideo')
-                document.getElementById('updateConversation').style.visibility = 'hidden';
+            //if(constraints[i].type == 'audioVideo') document.getElementById('updateConversation').style.visibility = 'hidden';
         }
         break;
     default:
@@ -599,15 +598,17 @@ function addVideoTag(stream,participant){
     var div = document.createElement('div');
     div.className = 'video-container';
     div.id = participant;
-    var $video = $('<video id="video'+ participant +'"" controls autoplay loop width="250" height="250"></video>');
+    var $video = $('<video id="video'+ participant +'"" controls autoplay loop width="100%"></video>');
     $(div).append($video);
 
+    $('#person_name').append(participant);
 
     var h2 = document.createElement('div');
     h2.className = 'name-person';
-    h2.innerHTML = participant;
+    //h2.innerHTML = participant;
     div.appendChild(h2);
     $('#remote').append($(div));
+
 
     var videoRemote = document.getElementById("video"+participant);
     attachMediaStream(videoRemote,stream)

@@ -74,7 +74,7 @@
                     <form class="navbar-form navbar-left " role="search" id="login">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="username@nodejs.wonder" id="loginText"  value="testuser1@nodejs.wonder" autofocus>
+                                <input type="text" class="form-control" placeholder="username@nodejs.wonder" id="loginText"  value="test@nodejs.wonder" autofocus>
                                 <span class="input-group-btn">
                             <button type="button" class="btn btn-primary" focus id="loginButton">Login <span class="glyphicon glyphicon-log-in"></span>
                                 </button>
@@ -190,19 +190,19 @@
             <div class="col-md-9 col-sm-12">
 
 
-                <div class="panel panel-primary hidden" id="video_container">
+                <div class="panel panel-primary " id="video_container">
                     <div class="panel-heading">
-                        John Doe
+                        <p id="person_name"></p>
                         <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                         </button>
                     </div>
                     <div class="panel-body">
                         <div class="embed-responsive embed-responsive-4by3">
-                            placeholder for video content:
-                            <div id="card" ondblclick="">
-                                <div id="local" style="margin-left:0px;">
+<!--
+                                <div id="local">
                                     <video id="remoteVideo" autoplay="autoplay" muted="true" width="100%"></video>
                                 </div>
+-->
                                 <div id="remote">
                                 </div>
                             </div>
@@ -220,7 +220,7 @@
                     <div class="col-md-12">
                         <button type="button" class="btn btn-primary btn-lg btn-block hidden" id="show_own_video">Show own picture</button>
                         <span class="help-block"></span>
-                        <div class="panel panel-primary hidden" id="own_video_container">
+                        <div class="panel panel-primary " id="own_video_container">
                             <div class="panel-heading">
                                 Me
                                 <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -228,7 +228,6 @@
                             </div>
                             <div class="panel-body">
                                 <div class="embed-responsive embed-responsive-16by9">
-                                    placeholder for the own video:
                                     <video id="localVideo" autoplay="autoplay" muted="true" width="100%"></video>
                                 </div>
                             </div>
