@@ -6,7 +6,7 @@ var idp_options =
         {
                 protocol : "http",
                 domain : "127.0.0.1",
-                port : '8080',
+                port : '80',
                 path: "idp_php/index.php?jsonp=returnIdentity&filter_rtcIdentity="
         };
 
