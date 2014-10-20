@@ -137,14 +137,14 @@ $(document).ready(function () {
 
     //login and logout buttons
     $("#loginButton").click(function () {
-        //if ($("#loginButton").hasClass('btn-primary')) {
+        if ($("#loginButton").hasClass('btn-primary')) {
             if (login.getData()==null){
                 initialize();
             } else {
                 hideModule.login();
                 initialize();
             }
-       // }
+        }
     });
     $("#logout_btn").click(function () {
         login.removeData();

@@ -136,34 +136,7 @@
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                Connection1
-            </a>
-        </li>
-        <li class="item">
-            <a href="#">
-                <button type="button" class="close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                Connection2
-            </a>
-        </li>
-        <li class="item">
-            <a href="#">
-                <button type="button" class="close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                Connection3
-            </a>
-        </li>
-        <li class="item">
-            <a href="#">
-                <button type="button" class="close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                Connection4
+                <span class="person_name"></span>
             </a>
         </li>
     </ul>
@@ -188,30 +161,17 @@
         <div class="row">
             <!-- video container -->
             <div class="col-md-9 col-sm-12">
-
-
-                <div class="panel panel-primary " id="video_container">
+                <div class="panel panel-primary hidden" id="video_container">
                     <div class="panel-heading">
-                        <p id="person_name"></p>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="person_name"></span>
                         <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                         </button>
                     </div>
                     <div class="panel-body">
-                        <div class="embed-responsive embed-responsive-4by3">
-<!--
-                                <div id="local">
-                                    <video id="remoteVideo" autoplay="autoplay" muted="true" width="100%"></video>
-                                </div>
--->
-                                <div id="remote">
-                                </div>
-                            </div>
-
-                        </div>
+                        <div class="embed-responsive embed-responsive-4by3" id="remote"></div>
                     </div>
                 </div>
-
-
             </div>
             <!-- /.video container -->
             <div class="col-md-3 col-sm-12">
@@ -220,14 +180,14 @@
                     <div class="col-md-12">
                         <button type="button" class="btn btn-primary btn-lg btn-block hidden" id="show_own_video">Show own picture</button>
                         <span class="help-block"></span>
-                        <div class="panel panel-primary " id="own_video_container">
+                        <div class="panel panel-primary hidden" id="own_video_container">
                             <div class="panel-heading">
                                 Me
                                 <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                                 </button>
                             </div>
                             <div class="panel-body">
-                                <div class="embed-responsive embed-responsive-16by9">
+                                <div class="embed-responsive embed-responsive-4by3">
                                     <video id="localVideo" autoplay="autoplay" muted="true" width="100%"></video>
                                 </div>
                             </div>

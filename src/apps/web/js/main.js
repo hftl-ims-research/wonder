@@ -161,7 +161,6 @@ document.onreadystatechange = function(){
                  
                 console.log("Set constraints to " + ResourceType.AUDIO_VIDEO);
             }
-            
             doCall();
         }
     }

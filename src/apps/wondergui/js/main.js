@@ -98,7 +98,7 @@ document.onreadystatechange = function(){
  */
     function doIndividualCall(type) {
         peers = seePersonsToCall(document.getElementById('callTo').value);
-        alert(peers);
+        console.log("calling: "+peers+" ...");
 
         if(!peers){
             alert("All the identities must be from the same domain to do a Multiparty Conversation!")
@@ -198,8 +198,7 @@ function doCall() {
     $("#callingModal").text("Calling: " + peersString);
     $('#modalInviting').modal('show');
 
-    conversation.open(peers, constraints, invitation, function(){}, function(){});
-
+    conversation.open(peers, "", constraints, invitation, function(){}, function(){});
 
 }
 
@@ -246,18 +245,15 @@ function onMessage(message) {
 
         case MessageType.ACCEPTED:
             $('#modalInviting').modal('hide');
-            document.getElementById('call').style.visibility = 'hidden';
+            //document.getElementById('call').style.visibility = 'hidden';
             //if(conversation.owner.identity.rtcIdentity == myRtcIdentity){
-                document.getElementById('updateConversation').style.visibility = 'visible';
+                //document.getElementById('updateConversation').style.visibility = 'visible';
             //}
-            document.getElementById('hangup').style.visibility = 'visible';
+            //document.getElementById('hangup').style.visibility = 'visible';
             for(var i=0; i< constraints.length; i++){
-                if(constraints[i].type == 'audioVideo')
-                    document.getElementById('updateConversation').style.visibility = 'hidden';
-                if(constraints[i].type == 'chat')
-                    document.getElementById('chat').style.visibility = 'visible';
-                if(constraints[i].type == 'file')
-                    document.getElementById('fileSharing').style.visibility = 'visible';
+              //  if(constraints[i].type == 'audioVideo') document.getElementById('updateConversation').style.visibility = 'hidden';
+             //   if(constraints[i].type == 'chat') document.getElementById('chat').style.visibility = 'visible';
+               // if(constraints[i].type == 'file') document.getElementById('fileSharing').style.visibility = 'visible';
             }
             break;
         case MessageType.CONNECTIVITY_CANDIDATE:
@@ -564,7 +560,7 @@ function addVideoTag(stream,participant){
     var $video = $('<video id="video'+ participant +'"" controls autoplay loop width="100%"></video>');
     $(div).append($video);
 
-    $('#person_name').append(participant);
+    $('.person_name').append(participant);
 
     var h2 = document.createElement('div');
     h2.className = 'name-person';
