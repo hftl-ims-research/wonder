@@ -41,18 +41,10 @@ var peersString = "";
  */
 
 document.getElementById('logout_btn').onclick = function(){
-    //$('#login').fadeIn("slow").removeClass("hidden");
-    //$('.after_login').fadeOut("slow");
-    $('#login').removeClass("hidden");
-    $('.after_login').addClass("hidden");
     myIdentity.messagingStub.impl.disconnect(myRtcIdentity, onMessage);
     myIdentity = null;
     myRtcIdentity = "";
     setStatus(myRtcIdentity);
-    document.getElementById('login').style.visibility = 'visible';
-    document.getElementById('videoContainer').style.visibility = 'hidden';
-    document.getElementById('call').style.visibility = 'hidden';
-
 }
 
 
@@ -87,11 +79,6 @@ document.onreadystatechange = function(){
                             stub.impl.connected(myRtcIdentity, window.location.toString().split("#")[1]);
 
 
-                            document.getElementById('videoContainer').style.visibility = 'visible';
-                            document.getElementById('call').style.visibility = 'visible';
-                            //document.getElementById('chat').style.visibility = 'visible';
-                            document.getElementById('updateConversation').style.visibility = 'visible';
-
                         });
                     });
                 });
@@ -105,32 +92,6 @@ document.onreadystatechange = function(){
     }
 }
 
-
-/*
- * WsQuery for ws get Identities
- */
- /*function wsQuery(rtcIdentity, callback){
-        //that.EBViewModel.eb
-        //myIdentity.messagingStub.impl.eventbus
-        that.EBViewModel.eb.send("test.my_persistor",
-                                          {
-                                              action: "findone",
-                                              collection: "users",
-                                              matcher: {
-                                                  rtcIdentity: rtcIdentity
-                                              }
-                                          }, function(reply){
-                                              console.log(reply);
-                                              var rows = new Array();
-                                              rows.push(reply.result);
-
-                                              var data = new Object();
-                                              data.rows = rows;
-                                              callback(data);
-                                              //Idp.getInstance().treatIdentity(reply.result);
-                                          });
-            }
-*/
 
 /**
  * Test Function
@@ -244,11 +205,13 @@ function doCall() {
 
 function hangup(){
     peersString = "";
-    document.getElementById('call').style.visibility = 'visible';
+ /*  document.getElementById('call').style.visibility = 'visible';
     document.getElementById('hangup').style.visibility = 'hidden';
     document.getElementById('chat').style.visibility = 'hidden';
     document.getElementById('fileSharing').style.visibility = 'hidden';
     document.getElementById('updateConversation').style.visibility = 'hidden';
+
+*/
     var divChat = document.getElementById('textChat');
     while(divChat.firstChild){
         divChat.removeChild(divChat.firstChild);
