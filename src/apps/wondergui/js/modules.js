@@ -117,19 +117,19 @@ $(document).ready(function () {
 
 
     $("#open_chat_btn").click(function () {
-        if (!($(this).hasClass('active'))) {
+        if ((!($(this).hasClass('active'))) && (input_not_empty_check('#callTo') === true)) {
             showModule.chat();
             doIndividualCall('chat');
         } else hideModule.chat();
     });
     $("#voice_call_btn").click(function () {
-        if (!($(this).hasClass('active'))) {
+        if ( (!($(this).hasClass('active'))) && (input_not_empty_check('#callTo') === true)) {
             showModule.audio();
             doIndividualCall('audio');
         } else hideModule.audio();
     });
     $("#video_call_btn").click(function () {
-        if (!($(this).hasClass('active'))) {
+        if ((!($(this).hasClass('active'))) && (input_not_empty_check('#callTo') === true)) {
             showModule.video();
             doIndividualCall('audioVideo');
         } else hideModule.av();
@@ -137,7 +137,7 @@ $(document).ready(function () {
 
     //login and logout buttons
     $("#loginButton").click(function () {
-        if ($("#loginButton").hasClass('btn-primary')) {
+        if (($("#loginButton").hasClass('btn-primary')) && (input_not_empty_check('#loginText') === true) ) {
             if (login.getData()==null){
                 initialize();
             } else {
@@ -212,5 +212,16 @@ function windowHeight() {
         return document.body.offsetHeight;
     } else {
         return 0;
+    }
+}
+
+function input_not_empty_check(element) {
+    if ( $(element).val().length !== 0 ) {
+        $(element).parent().removeClass('has-error');
+        return true;
+    }
+    else  {
+        $(element).parent().addClass('has-error');
+        return false;
     }
 }
