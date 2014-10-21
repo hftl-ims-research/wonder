@@ -240,28 +240,20 @@
                                 </button>
                             </div>
                             <ul class="list-group" id="textChat">
+                                <!--
                                 <li class="list-group-item">
-                                    <p><span class="label label-primary">User1</span> Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                        <br>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                        <br>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                        <br>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    <span class="label label-primary">User1</span>
+                                    <p> This is how a message should look like!
                                     </p>
                                 </li>
-                                <li class="list-group-item">
-                                    <p><span class="label label-success">User2</span> A second message.
-                                    </p>
-                                </li>
-                                <li class="list-group-item">
-                                    <p><span class="label label-success">User2</span> And a third message.
-                                    </p>
-                                </li>
+                                -->
                             </ul>
                             <div class="panel-footer">
                                 <form class="form-inline" role="form">
                                     <textarea class="form-control" rows="3" style="width:100%;" id="datachannelmessage" placeholder="Please enter your message"></textarea>
                                     <span class="help-block"></span>
                                     <div class="form-group">
-                                        <button type="file" class="btn btn-primary" id="send_message">Send <span class="glyphicon glyphicon-send"></span>
+                                        <button type="button" class="btn btn-primary" id="send_message" onclick="return false;">Send <span class="glyphicon glyphicon-send"></span>
                                         </button>
                                         <span id="fileSharing">
                                             <input type="file" id="fileInput" class="hidden" type="file" accept="media_type">

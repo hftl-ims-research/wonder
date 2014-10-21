@@ -39,6 +39,16 @@ var contact = {
     }
 }
 
+var messages = {
+    getAll: function () {
+        return localStorage.getItem("messages");
+    },
+    store: function (data) {
+        //if no key exists, create a new key
+        localStorage.setItem("messages", data);
+    }
+}
+
 function getUniqueId (){
     var uniqid = Date.now();
     var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));

@@ -99,6 +99,10 @@ function showChatwindow() {
     $('#chat').fadeIn("slow").removeClass("hidden");
     $("#send_message").click(function () {
         sentMessageData();
+        $("#datachannelmessage").attr("value", "");
+        $("#datachannelmessage").text("");
+        //do not submit the form:
+        return false;
     });
     $("#send_file").click(function () {
         sentMessageDataFile();

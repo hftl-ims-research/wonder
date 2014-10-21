@@ -492,12 +492,13 @@ function onData(code,msg) {
         var iDiv = document.getElementById('textChat');
 
         // Now create and append to iDiv
-        var innerDiv = document.createElement('div');
-        innerDiv.className = 'block-2';
+        var innerDiv = document.createElement('li');
+        innerDiv.className = 'list-group-item block-2';
 
         // The variable iDiv is still good... Just append to it.
         iDiv.appendChild(innerDiv);
-        innerDiv.innerHTML = "<b>" + msg.from + "</b>" + " : " + msg.body;
+
+        innerDiv.innerHTML = '<span class="label label-primary">' + msg.from + "</span>" + "<p>" + msg.body  + "</p>";
 }
 
 
@@ -510,10 +511,10 @@ function sentMessageData(){
     var iDiv = document.getElementById('textChat');
 
     // Now create and append to iDiv
-    var innerDiv = document.createElement('div');
-    innerDiv.className = 'block-2';
+    var innerDiv = document.createElement('li');
+    innerDiv.className = 'list-group-item block-2';
     iDiv.appendChild(innerDiv);
-    innerDiv.innerHTML = "You:" + " : " + newMessage.body;
+    innerDiv.innerHTML = '<span class="label label-primary">You:</span>' + '<p>' + newMessage.body + '</p>';
 
 }
 
