@@ -1,5 +1,5 @@
 /* test data */
-var initialdata = '{"contacts": {"'+getUniqueId()+'": {"name": "Name1", "surname": "Surname1", "logindata": "Mail@example.com"}}}';
+var initialdata = '{"contacts": {"'+getUniqueId()+'": {"name": "Doe", "surname": "Bob", "logindata": "bob@nodejs.wonder"}}}';
 localStorage.setItem("contacts", initialdata);
 /* end test data */
 
@@ -33,6 +33,9 @@ var contact = {
     },
     remove: function (id) {
         localStorage.removeItem(id);
+    },
+    removeAll: function (){
+        localStorage.removeItem("contacts");
     }
 }
 

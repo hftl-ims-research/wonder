@@ -1,3 +1,6 @@
+
+
+
 //LOAD CONTACTS
 $('#contact_btn').click( function () {
     $('#contact_list').empty();
@@ -8,7 +11,11 @@ $('#contact_btn').click( function () {
     });
     var contacts = contact.getAll();
     $.each(contacts, function(i, item) {
-        $('#contact_list').append('<li><a><span class="text" value="'+contacts[i].logindata+'">'+contacts[i].name+', '+contacts[i].surname+'</span> <span class="label label-success">online</span></a>');
+        $('#contact_list').append('<li><a><span class="text" value="'+contacts[i].logindata+'">'+contacts[i].name+', '+contacts[i].surname+'</span> <span class="label label-success">online</span></a></li>');
+    });
+    $('#contact_list li a .text').click(function () {
+        var selected_contact = $(this).attr("value");
+        $("#callTo").val(selected_contact);
     });
 });
 
@@ -28,6 +35,9 @@ showModule = {
     },
     start : function () {
         $('#welcome_div').fadeIn('slow').removeClass('hidden');
+    },
+    login : function () {
+        $('#login').fadeIn("slow").removeClass("hidden");
     }
 }
 
@@ -59,7 +69,9 @@ hideModule = {
     },
     all: function () {
         hideModule.avc();
+        $('.after_login').fadeOut("slow").addClass("hidden");
         showModule.start();
+        showModule.login();
     },
     start: function () {
         $('#welcome_div').fadeOut('slow').addClass('hidden');
@@ -105,11 +117,10 @@ function showChatwindow() {
 
 /*the following functions are called after the DOM is ready: */
 $(document).ready(function () {
-
-    $('#contact_list li a .text').click(function (evt) {
-        var selected_contact = $(this).attr("value");
-        $("#callTo").val(selected_contact);
-    });
+    if (login.getData()!==null){
+        hideModule.login();
+        setStatus(login.getData())
+    }
     $('#modal_add_contact_btn').click(function (){
         contact.store($('#input_login_name').val(),$('#input_login_surname').val(),$('#input_logindata').val());
         $('#modalAdContact').modal('hide');
@@ -138,18 +149,15 @@ $(document).ready(function () {
     //login and logout buttons
     $("#loginButton").click(function () {
         if (($("#loginButton").hasClass('btn-primary')) && (input_not_empty_check('#loginText') === true) ) {
-            if (login.getData()==null){
-                initialize();
-            } else {
-                hideModule.login();
-                initialize();
-            }
+            hideModule.login();
+            initialize();
         }
     });
     $("#logout_btn").click(function () {
-        login.removeData();
         hangup();
         hideModule.all();
+        login.removeData();
+        contact.removeAll();
     });
 
 
