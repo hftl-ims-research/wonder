@@ -29,6 +29,11 @@ showModule = {
         $('#video_container').fadeIn("slow").removeClass("hidden");
         $('#video_call_btn').addClass("active btn-danger");
     },
+    ownVideo: function () {
+        $('#own_video_container').fadeIn("slow").removeClass("hidden");
+        $('#video_container').fadeIn("slow").removeClass("hidden");
+        $('#video_call_btn').addClass("active btn-danger");
+    },
     chat: function () {
         $('#open_chat_btn').addClass("active btn-primary");
         showChatwindow();
@@ -53,6 +58,7 @@ hideModule = {
     },
     ownVideo: function () {
         $('#own_video_container').fadeOut("slow").addClass("hidden");
+        $("#show_own_video").fadeIn('slow').removeClass('hidden');
     },
     av: function () {
         hideModule.audio();
@@ -117,10 +123,13 @@ function showChatwindow() {
 
 /*the following functions are called after the DOM is ready: */
 $(document).ready(function () {
+
     if (login.getData()!==null){
         hideModule.login();
         setStatus(login.getData())
     }
+
+
     $('#modal_add_contact_btn').click(function (){
         contact.store($('#input_login_name').val(),$('#input_login_surname').val(),$('#input_logindata').val());
         $('#modalAdContact').modal('hide');
@@ -172,6 +181,10 @@ $(document).ready(function () {
     });
     $("#own_video_container .close").click(function () {
         hideModule.ownVideo();
+        $("#show_own_video").click(function () {
+            showModule.ownVideo();
+            $("#show_own_video").fadeOut('slow').addClass('hidden');
+        });
     });
 
     //modal outgoing call: cancel-btn
