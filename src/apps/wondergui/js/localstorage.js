@@ -1,7 +1,11 @@
 /* test data */
-var initialdata = '{"contacts": {"'+getUniqueId()+'": {"name": "Doe", "surname": "Bob", "logindata": "bob@nodejs.wonder"}}}';
-localStorage.setItem("contacts", initialdata);
-/* end test data */
+var firstContact = '"'+getUniqueId()+'": {"name": "Doe", "surname": "Bob", "logindata": "bob@nodejs.wonder"}';
+var initialdata = '{"contacts": {'+firstContact+'}}';
+
+if (localStorage.getItem("contacts") === null){
+    localStorage.setItem("contacts", initialdata);
+}
+    /* end test data */
 
 var login = {
     getData : function() {
