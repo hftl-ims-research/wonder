@@ -43,6 +43,12 @@ showModule = {
     },
     login : function () {
         $('#login').fadeIn("slow").removeClass("hidden");
+    },
+    all: function () {
+        showModule.audio();
+        showModule.video();
+        showModule.ownVideo();
+        showModule.chat();
     }
 }
 
@@ -63,6 +69,7 @@ hideModule = {
     av: function () {
         hideModule.audio();
         hideModule.ownVideo();
+        $("#show_own_video").addClass('hidden');
         hideModule.video();
     },
     chat: function () {
@@ -109,7 +116,7 @@ function showChatwindow() {
     });
     $('#fileInput').change(function () {
         var filename = $('#fileInput').val().split('\\').pop();
-        $('#fileSharing').append('<span class="label label-default">' + filename + '</span>');
+        $('#fileSharing').append('<span class="label label-default">' + filename + ' </span>');
     });
 
     //add wysiwyg editor to txtarea
@@ -132,7 +139,6 @@ $(document).ready(function () {
         hideModule.login();
         setStatus(login.getData())
     }
-
 
     $('#modal_add_contact_btn').click(function (){
         contact.store($('#input_login_name').val(),$('#input_login_surname').val(),$('#input_logindata').val());
@@ -185,10 +191,12 @@ $(document).ready(function () {
     });
     $("#own_video_container .close").click(function () {
         hideModule.ownVideo();
-        $("#show_own_video").click(function () {
-            showModule.ownVideo();
-            $("#show_own_video").fadeOut('slow').addClass('hidden');
-        });
+
+    });
+
+    $("#show_own_video").click(function () {
+        $("#show_own_video").addClass('hidden');
+        showModule.ownVideo();
     });
 
     //modal outgoing call: cancel-btn

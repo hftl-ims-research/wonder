@@ -599,6 +599,8 @@ function seePersonsToCall(string){
     var peerstocall = string.split(";");
     var peersFinal = new Array();
     var permit = true;
+
+  try {
     for(var i =0; i < peerstocall.length; i++){
         if(peerstocall[i].split("@").length == 1){
             peersFinal.push(peerstocall[i] + "");
@@ -617,4 +619,7 @@ function seePersonsToCall(string){
         return false;
     else
         return peersFinal;
+  } catch (e){
+    console.log("error: " + e);
+  }
 }
