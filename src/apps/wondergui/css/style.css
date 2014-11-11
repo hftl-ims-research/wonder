@@ -8,6 +8,12 @@ body {
     color: #ffE;
     padding-right: 10px;
 }
+
+.navbar-collapse{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .navbar-form{
     border-top: none;
     border-bottom: none;

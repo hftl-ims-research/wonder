@@ -36,11 +36,24 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script type="text/javascript">
+            var loginName;
+
+            var TURN = {
+            url:"turn:150.140.184.242:3478",
+             username: "wonder",
+             credential:"w0nd3r"
+            };
+            var STUN ={url: "stun:150.140.184.242:3478"};
+            iceServers = { "iceServers": [STUN, TURN]};
+    </script>
+
 </head>
 
 <body>
 
-    <nav class="navbar navbar-default navbar-fixed-top navbar-static-top navbar-inverse" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
