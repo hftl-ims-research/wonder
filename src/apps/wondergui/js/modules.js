@@ -200,11 +200,11 @@ $(document).ready(function () {
     });
 
     //modal outgoing call: cancel-btn
-    $("#CancelButton").click(function () {
-        $('#modalInviting').modal('hide');
+    $("#CancelInviting").click(function () {
+        //$('#modalInviting').modal('hide');
         hideModule.av();
         hideModule.chat();
-        //closeConversation();
+        closeConversation();
     });
 
     //modal incoming call

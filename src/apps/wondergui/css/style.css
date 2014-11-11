@@ -8,7 +8,10 @@ body {
     color: #ffE;
     padding-right: 10px;
 }
-
 .navbar-form{
-    padding: 0px 25px ;
+    border-top: none;
+    border-bottom: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin-bottom: 0px;
 }

@@ -101,7 +101,8 @@ document.onreadystatechange = function(){
         console.log("calling: "+peers+" ...");
 
         if(!peers){
-            alert("All the identities must be from the same domain to do a Multiparty Conversation!")
+            console.error('Peers Value:' + peers);
+            console.error("All the identities must be from the same domain to do a Multiparty Conversation!")
         } else{
             if (type === "chat") {
                 constraints[0].type = ResourceType.CHAT;
@@ -232,9 +233,10 @@ function hangup(){
 
 function closeConversation(){
     peersString = "";
-    document.getElementById('call').style.visibility = 'visible';
+    //document.getElementById('call').style.visibility = 'visible';
     localVideo.src='';
-    conversation.close();
+    //conversation.close();
+    $('#modalInviting').modal('hide');
     conversation=null;
     var_init();
 }
@@ -329,8 +331,8 @@ function onMessage(message) {
             }
 
             removeVideoTag(message.from.rtcIdentity);
-
-            $('#modalInvite').modal({backdrop: 'static'}).modal('hide');
+            $('#modalInviting').modal('hide');
+            //$('#modalInvite').modal({backdrop: 'static'}).modal('hide');
 
             break;
         case MessageType.OFFER_ROLE: // set new moderator of the conversatoin
@@ -600,6 +602,8 @@ function seePersonsToCall(string){
     var peersFinal = new Array();
     var permit = true;
 
+    console.log("++++ current Peers to call: "+peerstocall);
+
   try {
     for(var i =0; i < peerstocall.length; i++){
         if(peerstocall[i].split("@").length == 1){
@@ -621,5 +625,7 @@ function seePersonsToCall(string){
         return peersFinal;
   } catch (e){
     console.log("error: " + e);
+    peersFinal.push(peerstocall);
+    return peersFinal;
   }
 }
