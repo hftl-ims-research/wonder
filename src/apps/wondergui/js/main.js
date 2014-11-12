@@ -199,6 +199,7 @@ function doCall() {
     $("#callingModal").text("Calling: " + peersString);
     $('#modalInviting').modal('show');
 
+    document.getElementById('callSound').play();
     conversation.open(peers, "", constraints, invitation, function(){}, function(){});
 
 }
@@ -247,6 +248,7 @@ function onMessage(message) {
 
         case MessageType.ACCEPTED:
             $('#modalInviting').modal('hide');
+            document.getElementById('callSound').pause();
             //document.getElementById('call').style.visibility = 'hidden';
             //if(conversation.owner.identity.rtcIdentity == myRtcIdentity){
                 //document.getElementById('updateConversation').style.visibility = 'visible';
@@ -344,7 +346,8 @@ function onMessage(message) {
             var Acceptbtn = document.getElementById('AcceptButton');
             //$('#modalInvite').modal({backdrop: 'static'}).modal('show');
             $("#receivingModal").text(message.from.rtcIdentity + " is trying to call you..");
-            $('#modalInvite').modal('show')
+            $('#modalInvite').modal('show');
+            document.getElementById('ringingSound').play();
             /*var conf = confirm("Incoming call from: " + message.from.rtcIdentity + " Accept?");
             if (conf == true)
             {

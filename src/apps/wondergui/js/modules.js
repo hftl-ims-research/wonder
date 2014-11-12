@@ -205,16 +205,21 @@ $(document).ready(function () {
         hideModule.av();
         hideModule.chat();
         closeConversation();
+        document.getElementById('callSound').pause();
     });
 
     //modal incoming call
     $("#AcceptButton").click(function () {
         //handled in main.js
+        showModule.video();
+        showModule.ownVideo();
+        document.getElementById('ringingSound').pause();
     });
     $("#RejectButton").click(function () {
         $('#modalInvite').modal({
             backdrop: 'static'
         }).modal('hide');
+        document.getElementById('ringingSound').pause();
         Conversation.reject(message);
     });
 
