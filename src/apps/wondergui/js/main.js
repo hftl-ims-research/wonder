@@ -249,16 +249,20 @@ function onMessage(message) {
         case MessageType.ACCEPTED:
             $('#modalInviting').modal('hide');
             document.getElementById('callSound').pause();
+            $('#conversation_tabs').append(addNewConversationTab());
             //document.getElementById('call').style.visibility = 'hidden';
             //if(conversation.owner.identity.rtcIdentity == myRtcIdentity){
                 //document.getElementById('updateConversation').style.visibility = 'visible';
             //}
             //document.getElementById('hangup').style.visibility = 'visible';
+            /*
             for(var i=0; i< constraints.length; i++){
-              //  if(constraints[i].type == 'audioVideo') document.getElementById('updateConversation').style.visibility = 'hidden';
-             //   if(constraints[i].type == 'chat') document.getElementById('chat').style.visibility = 'visible';
-               // if(constraints[i].type == 'file') document.getElementById('fileSharing').style.visibility = 'visible';
+                if(constraints[i].type == 'audioVideo') document.getElementById('updateConversation').style.visibility = 'hidden';
+                if(constraints[i].type == 'chat') document.getElementById('chat').style.visibility = 'visible';
+                if(constraints[i].type == 'file') document.getElementById('fileSharing').style.visibility = 'visible';
             }
+            */
+
             break;
         case MessageType.CONNECTIVITY_CANDIDATE:
 
@@ -366,6 +370,7 @@ function onMessage(message) {
                 $('#modalInvite').modal({backdrop: 'static'}).modal('hide');
                 conversation = new Conversation(myIdentity, that.onRTCEvt.bind(that), that.onMessage.bind(that), iceServers, constraints);
                 conversation.acceptInvitation(message, "", function(){}, function(){});
+                $('#conversation_tabs').append(addNewConversationTab());
             }
             break;
         case MessageType.RESOURCE_REMOVED:
@@ -503,7 +508,7 @@ function onData(code,msg) {
         // The variable iDiv is still good... Just append to it.
         iDiv.appendChild(innerDiv);
 
-        innerDiv.innerHTML = '<span class="label label-primary">' + msg.from + "</span>" + "<p>" + msg.body  + "</p>";
+        innerDiv.innerHTML = '<span class="label label-default">' + msg.from + "</span>" + "<p>" + msg.body  + "</p>";
 }
 
 
