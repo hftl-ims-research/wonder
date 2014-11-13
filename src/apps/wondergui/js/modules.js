@@ -239,6 +239,24 @@ $(document).ready(function () {
         evt.stopPropagation(); //stops the document click action
         $(this).parent().parent().remove();
     });
+
+    $("#selectDomain").change(function () {
+        var domain = $(this).val();
+        console.log('selected Domain: '+domain);
+
+        switch(domain) {
+            case 'nodejs':
+                $('.imsLoginForm').addClass('hidden');
+                $('.nodejsLoginForm').removeClass('hidden');
+                break;
+            case 'ims':
+                $('.nodejsLoginForm').addClass('hidden');
+                $('.imsLoginForm').removeClass('hidden');
+                break;
+            default:
+                ;
+        }
+    });
 });
 
 

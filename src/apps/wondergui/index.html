@@ -71,21 +71,44 @@
                     <!-- login-form -->
                     <form class="navbar-form navbar-left form-horizontal" role="form" id="login">
                         <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="alice@nodejs.wonder" id="loginText"  value="alice@nodejs.wonder" autofocus>
+                            <select class="form-control" id="selectDomain">
+                                <option value="nodejs">NodeJS</option>
+                                <option value="ims">IMS</option>
+                            </select>
+
+                            <!-- nodejs-login-form -->
+                            <div class="input-group nodejsLoginForm">
+                                <input type="text" class="form-control" placeholder="user@domain" id="loginText"  value="alice@nodejs.wonder" autofocus>
                                 <span class="input-group-btn">
-                            <button type="button" class="btn btn-primary" focus id="loginButton">Login <span class="glyphicon glyphicon-log-in"></span>
-                                </button>
+                                    <button type="button" class="btn btn-primary" focus id="loginButton">Login <span class="glyphicon glyphicon-log-in"></span>
+                                    </button>
                                 </span>
                             </div>
+                            <!-- /.nodejs-login-form -->
+                            <!-- ims-login-form -->
+                            <div class="input-group hidden imsLoginForm">
+                                <span class="input-group-addon">Private-ID:</span>
+                                <input type="text" class="form-control" placeholder="user@domain" id="imsPrivateId" autofocus>
+                            </div>
+                            <div class="input-group hidden imsLoginForm">
+                                <span class="input-group-addon">Public-ID:</span>
+                                <input type="text" class="form-control" placeholder="user" id="imsPublicId">
+                            </div>
+                            <div class="input-group hidden imsLoginForm">
+                                <span class="input-group-addon">Proxy:</span>
+                                <input type="text" class="form-control" placeholder="proxyurl:port" id="imsProxy">
+                            </div>
+                            <button type="button" class="btn btn-primary hidden imsLoginForm" focus id="imsLoginButton">Login <span class="glyphicon glyphicon-log-in"></span>
+                            </button>
+                            <!-- /.ims-login-form -->
                         </div>
                     </form>
                     <!-- /.login-form -->
                     <!-- logout-form -->
                     <form class="navbar-form navbar-left form-horizontal after_login hidden" id="logout" role="form">
                         <div class="form-group">
-                            <label for="logout_btn" class="col-md-10 col-sm-9 col-xs-8 control-label"><span class="glyphicon glyphicon-user"></span> <span  id="status"></span></label>
-                            <div class="col-md-2 col-sm-3 col-xs-4">
+                            <label for="logout_btn" class="col-md-8 col-sm-9 col-xs-8 control-label"><span class="glyphicon glyphicon-user"></span> <span  id="status"></span></label>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
                                 <button class="btn btn-danger pull-right" id="logout_btn">Logout <span class="glyphicon glyphicon-log-out"></span></button>
                             </div>
                         </div>
