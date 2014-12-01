@@ -254,13 +254,23 @@ function onMessage(message) {
                 //document.getElementById('updateConversation').style.visibility = 'visible';
             //}
             //document.getElementById('hangup').style.visibility = 'visible';
-            /*
+
             for(var i=0; i< constraints.length; i++){
-                if(constraints[i].type == 'audioVideo') document.getElementById('updateConversation').style.visibility = 'hidden';
-                if(constraints[i].type == 'chat') document.getElementById('chat').style.visibility = 'visible';
-                if(constraints[i].type == 'file') document.getElementById('fileSharing').style.visibility = 'visible';
+                if(constraints[i].type == 'audioVideo') {
+                    showModule.audio();
+                    showModule.video();
+                    showModule.ownVideo();
+                    //document.getElementById('updateConversation').style.visibility = 'hidden';
+                }
+                if(constraints[i].type == 'chat') {
+                    showModule.chat();
+                    //document.getElementById('chat').style.visibility = 'visible';
+                }
+                if(constraints[i].type == 'file') {
+                    //document.getElementById('fileSharing').style.visibility = 'visible';
+                }
             }
-            */
+
 
             break;
         case MessageType.CONNECTIVITY_CANDIDATE:
@@ -361,10 +371,11 @@ function onMessage(message) {
                 //document.getElementById('hangup').style.visibility = 'visible';
                 //document.getElementById('call').style.visibility = 'hidden';
                 for(var i=0; i< message.body.constraints.length; i++){
-                    if(message.body.constraints[i].type == 'andudioVideo')
+                    if(message.body.constraints[i].type == 'audioVideo')
                         //document.getElementById('updateConversation').style.visibility = 'hidden';
                         showModule.video();
                         showModule.audio();
+                        showModule.ownVideo();
                     if(message.body.constraints[i].type == 'chat')
                         //document.getElementById('chat').style.visibility = 'visible';
                         showModule.chat();
@@ -463,7 +474,7 @@ function onRTCEvt(event, evt) {
             codecChat=evt.codec;
             conversation.dataBroker.addCodec(codecChat);
             codecChat.addListener(onData);
-            ////document.getElementById('chat').style.visibility = 'visible';
+            showModule.chat();
         }
         if(evt.codec.type=="file"){
             codecIDFile = evt.codec.id;

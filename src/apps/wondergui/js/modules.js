@@ -222,8 +222,8 @@ $(document).ready(function () {
     //modal incoming call
     $("#AcceptButton").click(function () {
         //handled in main.js
-        showModule.video();
-        showModule.ownVideo();
+        //showModule.video();
+        //showModule.ownVideo();
         document.getElementById('ringingSound').pause();
     });
     $("#RejectButton").click(function () {
