@@ -11,10 +11,10 @@ $('#contact_btn').click( function () {
     });
     var contacts = contact.getAll();
     $.each(contacts, function(i, item) {
-        $('#contact_list').append('<li><a><span class="text" value="'+contacts[i].logindata+'">'+contacts[i].name+', '+contacts[i].surname+'</span> <span class="label label-success">online</span></a></li>');
+        $('#contact_list').append('<li><a><span class="text" value="'+contacts[i].logindata+'">'+contacts[i].name+', '+contacts[i].surname+'</span> <span class="label label-success pull-right">online</span></a></li>');
     });
-    $('#contact_list li a .text').click(function () {
-        var selected_contact = $(this).attr("value");
+    $('#contact_list li a').click(function () {
+        var selected_contact = $(this).children(".text").attr("value");
         $("#callTo").val(selected_contact);
     });
 });
@@ -162,6 +162,17 @@ $(document).ready(function () {
         if ((!($(this).hasClass('active'))) && (input_not_empty_check('#callTo') === true)) {
             showModule.video();
             doIndividualCall('audioVideo');
+
+            $('#localVideo').videoUI({
+                                            'playMedia': false,
+                                            'progressMedia': false,
+                                            'timerMedia': false,
+                                            'volumeMedia':10,
+                                            'fullscreenMedia': true,
+                                            'autoHide':false,
+                                            'autoPlay': true
+                                        });
+
         } else hideModule.av();
     });
 
