@@ -382,7 +382,7 @@ function onMessage(message) {
                     }
                     if(message.body.constraints[i].type == 'audio') {
                         //document.getElementById('chat').style.visibility = 'visible';
-                        showModule.chat();
+                        showModule.audio();
                     }
                     if(message.body.constraints[i].type == 'chat') {
                         //document.getElementById('chat').style.visibility = 'visible';
@@ -405,14 +405,16 @@ function onMessage(message) {
             peersString = "";
             localVideo.src = '';
             conversation = null;
+            /*
             if(document.getElementById('updateConversation').style.visibility == 'visible')
                 document.getElementById('updateConversation').style.visibility = 'hidden';
+            */
+            //document.getElementById('hangup').style.visibility = 'hidden';
+            hideModule.chat();
+            //document.getElementById('chat').style.visibility = 'hidden';
+            //dcument.getElementById('fileSharing').style.visibility = 'hidden';
 
-            document.getElementById('hangup').style.visibility = 'hidden';
-            document.getElementById('chat').style.visibility = 'hidden';
-            document.getElementById('fileSharing').style.visibility = 'hidden';
-
-            document.getElementById('call').style.visibility = 'visible';
+            //document.getElementById('call').style.visibility = 'visible';
             var div = document.getElementById('remote');
 
             while(div.firstChild){
@@ -433,13 +435,14 @@ function onMessage(message) {
             break;
         case MessageType.UPDATE:
             console.log("UPDATE RECEIVED");
-            document.getElementById('chat').style.visibility = 'visible';
+            showModule.chat();
+            //document.getElementById('chat').style.visibility = 'visible';
             // HTML5 BUG WORKAROUND
             // The HTML5 video tag element does not display new MediaTracks when added, so you have to manually reattach the media stream
             conversation.addResource(message.body.newConstraints, message,function(){reattachMediaStream(video0,video0);},function(){});
             break;
         case MessageType.UPDATED:
-            document.getElementById('updateConversation').style.visibility = 'hidden';
+            //document.getElementById('updateConversation').style.visibility = 'hidden';
             // HTML5 BUG WORKAROUND
             // The HTML5 video tag element does not display new MediaTracks when added, so you have to manually reattach the media stream
             //if(video0) {reattachMediaStream(video0,video0);}
@@ -484,7 +487,7 @@ function onRTCEvt(event, evt) {
             codecChat=evt.codec;
             conversation.dataBroker.addCodec(codecChat);
             codecChat.addListener(onData);
-            showModule.chat();
+            //showModule.chat();
         }
         if(evt.codec.type=="file"){
             codecIDFile = evt.codec.id;
@@ -532,7 +535,7 @@ function onData(code,msg) {
         // The variable iDiv is still good... Just append to it.
         iDiv.appendChild(innerDiv);
 
-        innerDiv.innerHTML = '<span class="label label-default">' + msg.from + "</span>" + "<span>" + msg.body  + "</span>";
+        innerDiv.innerHTML = '<span class="label label-default">' + msg.from + "</span>" + " <span>" + msg.body  + "</span>";
 }
 
 
@@ -548,7 +551,7 @@ function sentMessageData(){
     var innerDiv = document.createElement('li');
     innerDiv.className = 'list-group-item block-2';
     iDiv.appendChild(innerDiv);
-    innerDiv.innerHTML = '<span class="label label-primary">You:</span>' + '<span>' + newMessage.body + '</span>';
+    innerDiv.innerHTML = '<span class="label label-primary">You</span>' + ' <span>' + newMessage.body + '</span>';
 
 }
 
@@ -622,8 +625,8 @@ function removeVideoTag(participant){
     var divRemote = document.getElementById('remote');
     console.log("divdivRemote.firstChild: ", divRemote.childElementCount);
     if(divRemote.childElementCount == 0){
-        document.getElementById('updateConversation').style.visibility = 'hidden';
-        document.getElementById('hangup').style.visibility = 'hidden';
+        //document.getElementById('updateConversation').style.visibility = 'hidden';
+        //document.getElementById('hangup').style.visibility = 'hidden';
         hangup();
     }
 
