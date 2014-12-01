@@ -262,6 +262,9 @@ function onMessage(message) {
                     showModule.ownVideo();
                     //document.getElementById('updateConversation').style.visibility = 'hidden';
                 }
+                if(constraints[i].type == 'audio') {
+                    showModule.audio();
+                }
                 if(constraints[i].type == 'chat') {
                     showModule.chat();
                     //document.getElementById('chat').style.visibility = 'visible';
@@ -371,16 +374,23 @@ function onMessage(message) {
                 //document.getElementById('hangup').style.visibility = 'visible';
                 //document.getElementById('call').style.visibility = 'hidden';
                 for(var i=0; i< message.body.constraints.length; i++){
-                    if(message.body.constraints[i].type == 'audioVideo')
+                    if(message.body.constraints[i].type == 'audioVideo') {
                         //document.getElementById('updateConversation').style.visibility = 'hidden';
                         showModule.video();
                         showModule.audio();
                         showModule.ownVideo();
-                    if(message.body.constraints[i].type == 'chat')
+                    }
+                    if(message.body.constraints[i].type == 'audio') {
                         //document.getElementById('chat').style.visibility = 'visible';
                         showModule.chat();
-                    //if(message.body.constraints[i].type == 'file')
+                    }
+                    if(message.body.constraints[i].type == 'chat') {
+                        //document.getElementById('chat').style.visibility = 'visible';
+                        showModule.chat();
+                    }
+                    if(message.body.constraints[i].type == 'file') {
                         //document.getElementById('fileSharing').style.visibility = 'visible';
+                    }
                 }
                 $('#modalInvite').modal('hide');
                 conversation = new Conversation(myIdentity, that.onRTCEvt.bind(that), that.onMessage.bind(that), iceServers, constraints);
