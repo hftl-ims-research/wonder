@@ -24,11 +24,11 @@
         var video = document.getElementById(this.attr('id'));
         var controllerClass = this.attr('id');
         var duration = currentTime = timer = seekx = seekPos = buffered = timerBuffer=0;
-       // var widthController = this.width();
-        var widthController = "100%";
+        var widthController = this.width();
+       // var widthController = "100%";
 
 
-        this.after('<div class="videoController '+controllerClass+'"></div>');
+        this.after('<div class="videoController container '+controllerClass+'"></div>');
         $('.'+controllerClass).width(widthController);
 
         video.addEventListener("loadedmetadata", function() {

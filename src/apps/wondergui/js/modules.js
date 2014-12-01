@@ -292,9 +292,3 @@ function input_not_empty_check(element) {
         return false;
     }
 }
-
-function addNewConversationTab (){
-    var tabString = '<li class="item active"><a href="#"><button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span class="person_name"></span></a></li>';
-
-    return tabString;
-}

@@ -249,7 +249,6 @@ function onMessage(message) {
         case MessageType.ACCEPTED:
             $('#modalInviting').modal('hide');
             document.getElementById('callSound').pause();
-            $('#conversation_tabs').append(addNewConversationTab());
             //document.getElementById('call').style.visibility = 'hidden';
             //if(conversation.owner.identity.rtcIdentity == myRtcIdentity){
                 //document.getElementById('updateConversation').style.visibility = 'visible';
@@ -308,6 +307,7 @@ function onMessage(message) {
                 peersString = "";
                 localVideo.src = '';
                 conversation = null;
+                /*
                 if(document.getElementById('updateConversation').style.visibility == 'visible')
                     document.getElementById('updateConversation').style.visibility = 'hidden';
 
@@ -316,6 +316,7 @@ function onMessage(message) {
                 document.getElementById('fileSharing').style.visibility = 'hidden';
 
                 document.getElementById('call').style.visibility = 'visible';
+                */
                 var div = document.getElementById('remote');
 
                 while(div.firstChild){
@@ -361,16 +362,18 @@ function onMessage(message) {
                 //document.getElementById('call').style.visibility = 'hidden';
                 for(var i=0; i< message.body.constraints.length; i++){
                     if(message.body.constraints[i].type == 'andudioVideo')
-                        document.getElementById('updateConversation').style.visibility = 'hidden';
+                        //document.getElementById('updateConversation').style.visibility = 'hidden';
+                        showModule.video();
+                        showModule.audio();
                     if(message.body.constraints[i].type == 'chat')
-                        document.getElementById('chat').style.visibility = 'visible';
-                    if(message.body.constraints[i].type == 'file')
-                        document.getElementById('fileSharing').style.visibility = 'visible';
+                        //document.getElementById('chat').style.visibility = 'visible';
+                        showModule.chat();
+                    //if(message.body.constraints[i].type == 'file')
+                        //document.getElementById('fileSharing').style.visibility = 'visible';
                 }
-                $('#modalInvite').modal({backdrop: 'static'}).modal('hide');
+                $('#modalInvite').modal('hide');
                 conversation = new Conversation(myIdentity, that.onRTCEvt.bind(that), that.onMessage.bind(that), iceServers, constraints);
                 conversation.acceptInvitation(message, "", function(){}, function(){});
-                $('#conversation_tabs').append(addNewConversationTab());
             }
             break;
         case MessageType.RESOURCE_REMOVED:
@@ -402,7 +405,7 @@ function onMessage(message) {
             }
             var_init();
             if(!$('#modalInvite')[0].hidden)
-                $('#modalInvite').modal({backdrop: 'static'}).modal('hide');
+                $('#modalInvite').modal.modal('hide');
             break;
         case MessageType.SHARE_RESOURCE:
 
@@ -508,7 +511,7 @@ function onData(code,msg) {
         // The variable iDiv is still good... Just append to it.
         iDiv.appendChild(innerDiv);
 
-        innerDiv.innerHTML = '<span class="label label-default">' + msg.from + "</span>" + "<p>" + msg.body  + "</p>";
+        innerDiv.innerHTML = '<span class="label label-default">' + msg.from + "</span>" + "<span>" + msg.body  + "</span>";
 }
 
 
@@ -524,7 +527,7 @@ function sentMessageData(){
     var innerDiv = document.createElement('li');
     innerDiv.className = 'list-group-item block-2';
     iDiv.appendChild(innerDiv);
-    innerDiv.innerHTML = '<span class="label label-primary">You:</span>' + '<p>' + newMessage.body + '</p>';
+    innerDiv.innerHTML = '<span class="label label-primary">You:</span>' + '<span>' + newMessage.body + '</span>';
 
 }
 
