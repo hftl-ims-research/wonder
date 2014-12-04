@@ -536,6 +536,9 @@ function onData(code,msg) {
         iDiv.appendChild(innerDiv);
 
         innerDiv.innerHTML = '<span class="label label-default">' + msg.from + "</span>" + " <span>" + msg.body  + "</span>";
+
+    $("#datachannelmessage").attr("value", "");
+        $("#datachannelmessage").text("");
 }
 
 

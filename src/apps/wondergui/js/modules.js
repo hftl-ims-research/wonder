@@ -104,20 +104,7 @@ function showChatwindow() {
         $('#textChat').css("overflow", "scroll");
     });
     $('#chat').fadeIn("slow").removeClass("hidden");
-    $("#send_message").click(function () {
-        sentMessageData();
-        $("#datachannelmessage").attr("value", "");
-        $("#datachannelmessage").text("");
-        //do not submit the form:
-        return false;
-    });
-    $("#send_file").click(function () {
-        sentMessageDataFile();
-    });
-    $('#fileInput').change(function () {
-        var filename = $('#fileInput').val().split('\\').pop();
-        $('#fileSharing').append('<span class="label label-default">' + filename + ' </span>');
-    });
+
 
     //add wysiwyg editor to txtarea
     $('#datachannelmessage').wysihtml5({
@@ -267,6 +254,20 @@ $(document).ready(function () {
             default:
                 ;
         }
+    });
+
+     $("#send_message").click(function () {
+        sentMessageData();
+
+        //do not submit the form:
+        return false;
+    });
+    $("#send_file").click(function () {
+        sentMessageDataFile();
+    });
+    $('#fileInput').change(function () {
+        var filename = $('#fileInput').val().split('\\').pop();
+        $('#fileSharing').append('<span class="label label-default">' + filename + ' </span>');
     });
 });
 
