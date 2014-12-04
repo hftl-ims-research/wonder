@@ -105,16 +105,11 @@ function showChatwindow() {
     });
     $('#chat').fadeIn("slow").removeClass("hidden");
 
-
-    //add wysiwyg editor to txtarea
-    $('#datachannelmessage').wysihtml5({
-        "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
-        "emphasis": true, //Italics, bold, etc. Default true
-        "lists": false, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-        "html": false, //Button which allows you to edit the generated HTML. Default false
-        "link": false, //Button to insert a link. Default true
-        "image": false, //Button to insert an image. Default true,
-        "color": true //Button to change color of font
+    $('.summernote').summernote({
+        height: 100,                 // set editor height
+        minHeight: 50,             // set minimum height of editor
+        maxHeight: 300,             // set maximum height of editor
+        focus: true,                 // set focus to editable area after initializing summernote
     });
 }
 

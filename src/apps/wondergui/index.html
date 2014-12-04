@@ -10,36 +10,33 @@
     <!-- used to start like an app with google chrome on android -->
     <meta name="mobile-web-app-capable" content="yes">
 
-    <!-- Bootstrap Layout // loading default Stylesheet in 'js/main.js' -->
+    <!-- Vendor Stylesheets -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://bootflat.github.io/bootflat/css/bootflat.css">
-
-    <!-- Stylesheet -->
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="//bootflat.github.io/bootflat/css/bootflat.css" rel="stylesheet" type="text/css" />
     <link href="css/video_ui.css" rel="stylesheet" type="text/css" />
+    <link href="css/summernote.css" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Style -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
     <!-- jQuery -->
     <script src="js/jquery-1.11.1.min.js"></script>
 
     <!-- Bootstrap js -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="//bootflat.github.io/bootflat/js/icheck.min.js"></script>
+    <script src="//bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
+    <script src="//bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script>
 
     <!-- Video UI -->
     <script src="js/jquery.videoui.js"></script>
 
-
-    <script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
-    <script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
-    <script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script>
-
+    <!-- Summernote text editor -->
+    <script src="js/summernote.min.js"></script>
 
     <!-- localstorage -->
     <script src="js/localstorage.js"></script>
-
-    <!-- Bootstrap Wysiwyg-Text Area -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-wysihtml5-0.0.2.css">
-    <script src="js/wysihtml5-0.3.0_rc2.min.js"></script>
-    <script src="js/bootstrap-wysihtml5-0.0.2.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,15 +46,19 @@
     <![endif]-->
 
     <script type="text/javascript">
-            var loginName;
+        var loginName;
 
-            var TURN = {
-            url:"turn:150.140.184.242:3478",
-             username: "wonder",
-             credential:"w0nd3r"
-            };
-            var STUN ={url: "stun:150.140.184.242:3478"};
-            iceServers = { "iceServers": [STUN, TURN]};
+        var TURN = {
+            url: "turn:150.140.184.242:3478",
+            username: "wonder",
+            credential: "w0nd3r"
+        };
+        var STUN = {
+            url: "stun:150.140.184.242:3478"
+        };
+        iceServers = {
+            "iceServers": [STUN, TURN]
+        };
     </script>
 
 </head>
@@ -88,10 +89,10 @@
 
                             <!-- nodejs-login-form -->
                             <div class="input-group nodejsLoginForm">
-                                <input type="text" class="form-control" placeholder="user@domain" id="loginText"  value="alice@nodejs.wonder" autofocus>
+                                <input type="text" class="form-control" placeholder="user@domain" id="loginText" value="alice@nodejs.wonder" autofocus>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-primary" focus id="loginButton">Login <span class="glyphicon glyphicon-log-in"></span>
-                                    </button>
+                                </button>
                                 </span>
                             </div>
                             <!-- /.nodejs-login-form -->
@@ -117,9 +118,11 @@
                     <!-- logout-form -->
                     <form class="navbar-form navbar-left form-horizontal after_login hidden" id="logout" role="form">
                         <div class="form-group">
-                            <label for="logout_btn" class="col-md-8 col-sm-9 col-xs-8 control-label"><span class="glyphicon glyphicon-user"></span> <span  id="status"></span></label>
+                            <label for="logout_btn" class="col-md-8 col-sm-9 col-xs-8 control-label"><span class="glyphicon glyphicon-user"></span>  <span id="status"></span>
+                            </label>
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                                <button class="btn btn-danger pull-right" id="logout_btn">Logout <span class="glyphicon glyphicon-log-out"></span></button>
+                                <button class="btn btn-danger pull-right" id="logout_btn">Logout <span class="glyphicon glyphicon-log-out"></span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -132,26 +135,26 @@
                         <ul class="dropdown-menu" role="menu" id="contact_list">
 
                         </ul>
-                        </li>
-                        <!-- calling-form -->
-                        <form class="navbar-form navbar-right  form-horizontal  after_login hidden" role="search">
-                          <div class="form-group">
-                              <div class="col-md-7 col-sm-6 col-xs-7">
+                    </li>
+                    <!-- calling-form -->
+                    <form class="navbar-form navbar-right  form-horizontal  after_login hidden" role="search">
+                        <div class="form-group">
+                            <div class="col-md-7 col-sm-6 col-xs-7">
                                 <input type="text" class="form-control" autofocus id="callTo" placeholder="aliceORbob@nodejs.wonder">
-                              </div>
-                              <div class="col-md-5 col-sm-6 col-xs-5">
-                               <div class="btn-group pull-right">
-                                <button id="voice_call_btn" type="button" class="btn btn-success call_btn"><span class="glyphicon glyphicon-earphone"></span>
-                                </button>
-                                <button id="video_call_btn" type="button" class="btn btn-success call_btn"><span class="glyphicon glyphicon-facetime-video"></span>
-                                </button>
-                                <button id="open_chat_btn" type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span>
-                                </button>
-                             </div>
-                              </div>
-                          </div>
-                        </form>
-                        <!-- /.calling-form -->
+                            </div>
+                            <div class="col-md-5 col-sm-6 col-xs-5">
+                                <div class="btn-group pull-right">
+                                    <button id="voice_call_btn" type="button" class="btn btn-success call_btn"><span class="glyphicon glyphicon-earphone"></span>
+                                    </button>
+                                    <button id="video_call_btn" type="button" class="btn btn-success call_btn"><span class="glyphicon glyphicon-facetime-video"></span>
+                                    </button>
+                                    <button id="open_chat_btn" type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /.calling-form -->
                 </ul>
 
             </div>
@@ -164,18 +167,18 @@
     <!-- /.webrtc_tabs -->
 
     <div class="jumbotron" id="welcome_div">
-      <div class="container-fluid">
-        <h1>Welcome to WONDER GUI!</h1>
-        <p>This is a page for testing the WONDER Javascript framework, which uses Signaling-On-The-Fly for intercommunication between WebRTC Providers.</p>
-        <p>Please log on to your domain to use this service.</p>
-        <button type="button" class="btn btn-link disabled btn-lg btn-block">
-            <span class="glyphicon glyphicon-earphone"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-facetime-video"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-comment"></span>
-        </button>
-      </div>
+        <div class="container-fluid">
+            <h1>Welcome to WONDER GUI!</h1>
+            <p>This is a page for testing the WONDER Javascript framework, which uses Signaling-On-The-Fly for intercommunication between WebRTC Providers.</p>
+            <p>Please log on to your domain to use this service.</p>
+            <button type="button" class="btn btn-link disabled btn-lg btn-block">
+                <span class="glyphicon glyphicon-earphone"></span>
+                <span class="glyphicon glyphicon-plus"></span>
+                <span class="glyphicon glyphicon-facetime-video"></span>
+                <span class="glyphicon glyphicon-plus"></span>
+                <span class="glyphicon glyphicon-comment"></span>
+            </button>
+        </div>
     </div>
 
     <div class="container-fluid">
@@ -237,7 +240,7 @@
                             </ul>
                             <div class="panel-footer">
                                 <form class="form-inline" role="form">
-                                    <textarea class="form-control" rows="3" style="width:100%;" id="datachannelmessage" placeholder="Please enter your message"></textarea>
+                                    <textarea class="form-control summernote" rows="3" id="datachannelmessage" placeholder="Please enter your message"></textarea>
                                     <span class="help-block"></span>
                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary" id="send_message" onclick="return false;">Send <span class="glyphicon glyphicon-send"></span>
@@ -352,34 +355,29 @@
     </div>
     <!-- /.modal -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-
-    <!-- Buttons, view, etc. -->
     <script src="js/modules.js"></script>
-
+    <script src="js/notify.js"></script>
+    <script src="js/libs/adapter.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/notify.js"></script>
 
-    <script src="js/libs/adapter.js"></script>
+    <!-- Load the polyfill to switch-hit between Chrome and Firefox -->
+    <script src="../../libs/adapter.js"></script>
 
-    <script src="js/main.js"></script>
-
-        <script src="js/notify.js"></script>
-        <!-- Load the polyfill to switch-hit between Chrome and Firefox -->
-        <script src="../../libs/adapter.js"></script>
-
-        <script src="../../libs/Resource.js"></script>
-        <script src="../../libs/DataBroker.js"></script>
-        <script src="../../libs/DataMessage.js"></script>
-        <script src="../../libs/Codec.js"></script>
-        <script src="../../libs/Message.js"></script>
-        <script src="../../libs/Identity.js"></script>
-        <script src="../../libs/Enums.js"></script>
-        <script src="../../libs/helpfunctions.js"></script>
-        <script src="../../libs/Conversation.js"></script>
-        <script src="../../libs/Participant.js"></script>
-        <script src="../../libs/Idp.js"></script>
-        <script src="../../libs/MessageFactory.js"></script>
-        <script src="../../libs/MessagingStub.js"></script>
-        <script src="../../settings/domain.js"></script>
+    <script src="../../libs/Resource.js"></script>
+    <script src="../../libs/DataBroker.js"></script>
+    <script src="../../libs/DataMessage.js"></script>
+    <script src="../../libs/Codec.js"></script>
+    <script src="../../libs/Message.js"></script>
+    <script src="../../libs/Identity.js"></script>
+    <script src="../../libs/Enums.js"></script>
+    <script src="../../libs/helpfunctions.js"></script>
+    <script src="../../libs/Conversation.js"></script>
+    <script src="../../libs/Participant.js"></script>
+    <script src="../../libs/Idp.js"></script>
+    <script src="../../libs/MessageFactory.js"></script>
+    <script src="../../libs/MessagingStub.js"></script>
+    <script src="../../settings/domain.js"></script>
 </body>
 
 </html>

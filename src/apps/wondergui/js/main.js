@@ -544,7 +544,11 @@ function onData(code,msg) {
 
 function sentMessageData(){
 
-    var newMessage = new DataMessage(codecIDChat, "", myRtcIdentity,document.getElementById("datachannelmessage").value);
+
+    //var messageText = $("#datachannelmessage .note-editor .note-editable p").val();
+    var messageText = $('.summernote').code();
+
+    var newMessage = new DataMessage(codecIDChat, "", myRtcIdentity,messageText);
     codecChat.send(JSON.stringify(newMessage));
 
 
