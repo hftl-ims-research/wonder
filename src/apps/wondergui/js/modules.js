@@ -251,11 +251,16 @@ $(document).ready(function () {
     });
 
     //login and logout buttons
-    $("#loginButton").click(function () {
+    $("#loginButton, #imsLoginButton").click(function () {
         if (($("#loginButton").hasClass('btn-primary')) && (input_not_empty_check('#loginText') === true) ) {
             hideModule.login();
             initialize();
         }
+    });
+    $("#imsLoginButton").click(function () {
+            hideModule.login();
+            initializeIMS();
+            $('#modalIMS').modal('hide');
     });
     $("#logout_btn").click(function () {
         hangup();
@@ -331,12 +336,11 @@ $(document).ready(function () {
 
         switch(domain) {
             case 'nodejs':
-                $('.imsLoginForm').addClass('hidden');
                 $('.nodejsLoginForm').removeClass('hidden');
                 break;
             case 'ims':
+                $('#modalIMS').modal();
                 $('.nodejsLoginForm').addClass('hidden');
-                $('.imsLoginForm').removeClass('hidden');
                 break;
             default:
                 ;

@@ -96,22 +96,6 @@
                                 </span>
                             </div>
                             <!-- /.nodejs-login-form -->
-                            <!-- ims-login-form -->
-                            <div class="input-group hidden imsLoginForm">
-                                <span class="input-group-addon">Private-ID:</span>
-                                <input type="text" class="form-control" placeholder="user@domain" id="imsPrivateId" autofocus>
-                            </div>
-                            <div class="input-group hidden imsLoginForm">
-                                <span class="input-group-addon">Public-ID:</span>
-                                <input type="text" class="form-control" placeholder="user" id="imsPublicId">
-                            </div>
-                            <div class="input-group hidden imsLoginForm">
-                                <span class="input-group-addon">Proxy:</span>
-                                <input type="text" class="form-control" placeholder="proxyurl:port" id="imsProxy">
-                            </div>
-                            <button type="button" class="btn btn-primary hidden imsLoginForm" focus id="imsLoginButton">Login <span class="glyphicon glyphicon-log-in"></span>
-                            </button>
-                            <!-- /.ims-login-form -->
                         </div>
                     </form>
                     <!-- /.login-form -->
@@ -350,10 +334,65 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+
+    <!-- Modal IMS-->
+    <div class="modal fade" id="modalIMS">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">IMS Login</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- ims-login-form -->
+                    <form class="form-horizontal" role="form">
+                      <div class="form-group">
+                                <label for="imsPrivateId" class="col-sm-3 control-label">Private-ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="user@domain" id="imsPrivateId" autofocus>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imsPublicId" class="col-sm-3 control-label">Public-ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="user" id="imsPublicId">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imsProxy" class="col-sm-3 control-label">Proxy</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="proxyurl:port" id="imsProxy">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imsPass" class="col-sm-3 control-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Password" id="imsPass">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="button" class="btn btn-success">Login <span class="glyphicon glyphicon-log-in"></span>
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
+                    <!-- /.ims-login-form -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger"  data-dismiss="modal" ><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /. ims-modal -->
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/modules.js"></script>
     <script src="js/notify.js"></script>
-    <script src="js/libs/adapter.js"></script>
     <script src="js/main.js"></script>
     <script src="js/notify.js"></script>
 
