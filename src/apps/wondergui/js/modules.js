@@ -106,16 +106,119 @@ function showChatwindow() {
     $('#chat').fadeIn("slow").removeClass("hidden");
 
     $('.summernote').summernote({
-        height: 100,                 // set editor height
-        minHeight: 50,             // set minimum height of editor
+        height: 100,                // set editor height
+        minHeight: 50,              // set minimum height of editor
         maxHeight: 300,             // set maximum height of editor
-        focus: true,                 // set focus to editable area after initializing summernote
+        focus: true,                // set focus to editable area after initializing summernote
+        toolbar: [
+            /*
+            [
+                'style',
+                ['style']
+            ],
+            */
+            [
+                'font',
+                [
+                    'bold',
+                    'italic',
+                    'underline',
+                    /*
+                    'superscript',
+                    'subscript',
+                    'strikethrough',
+                    'clear'
+                    */
+                ]
+            ],
+            /*
+            [
+                'fontname',
+                [
+                    'fontname'
+                ]
+            ],
+            */
+
+            [
+                'fontsize',
+                [
+                    'fontsize'
+                ]
+            ],
+
+            // Still buggy
+            [
+                'color',
+                [
+                    'color'
+                ]
+            ],
+            /*
+            [
+                'para',
+                [
+                    'ul',
+                    'ol',
+                    'paragraph'
+                ]
+            ],
+            */
+            /*
+            [
+                'height',
+                [
+                    'height'
+                ]
+            ],
+            */
+            /*
+            [
+                'table',
+                [
+                    'table'
+                ]
+            ],
+            */
+            [
+                'insert',
+                [
+                    'link',
+                    'picture',
+                    'video',
+                    //'hr'
+                ]
+            ],
+            [
+                'view',
+                [
+                    //'fullscreen',
+                    //'codeview'
+                ]
+            ],
+            [
+                'help',
+                [
+                    'help'
+                ]
+            ]
+        ]
     });
 }
 
 
 /*the following functions are called after the DOM is ready: */
 $(document).ready(function () {
+
+    $('#localVideo').videoUI({
+        'playMedia': false,
+        'progressMedia': false,
+        'timerMedia': false,
+        'volumeMedia':10,
+        'fullscreenMedia': true,
+        'autoHide':false,
+        'autoPlay': true
+    });
 
     if (login.getData()!==null){
         hideModule.login();
@@ -144,17 +247,6 @@ $(document).ready(function () {
         if ((!($(this).hasClass('active'))) && (input_not_empty_check('#callTo') === true)) {
             showModule.video();
             doIndividualCall('audioVideo');
-
-            $('#localVideo').videoUI({
-                                            'playMedia': false,
-                                            'progressMedia': false,
-                                            'timerMedia': false,
-                                            'volumeMedia':10,
-                                            'fullscreenMedia': true,
-                                            'autoHide':false,
-                                            'autoPlay': true
-                                        });
-
         } else hideModule.av();
     });
 

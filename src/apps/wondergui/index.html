@@ -57,7 +57,7 @@
             url: "stun:150.140.184.242:3478"
         };
         iceServers = {
-            "iceServers": [STUN, TURN]
+            "iceServers": [ /* STUN, TURN */]
         };
     </script>
 
@@ -210,8 +210,8 @@
                                 </button>
                             </div>
                             <div class="panel-body">
-                                <div class="embed-responsive embed-responsive-4by3 videoUiWrapper thumbnail">
-                                    <video id="localVideo" width="100%">
+                                <div class="embed-responsive embed-responsive-4by3 videoUiWrapper">
+                                    <video id="localVideo" width="100%" autoplay loop>
                                     </video>
                                 </div>
                             </div>
@@ -247,10 +247,6 @@
                                         </button>
                                         <span id="fileSharing">
                                             <input type="file" id="fileInput" class="hidden" type="file" accept="media_type">
-                                        <button type="button" class="btn btn-default" id="attach_file" onclick="$('#fileInput').click();"><span class="glyphicon glyphicon-paperclip"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-default" id="refresh_chat"><span class="glyphicon glyphicon-refresh"></span>
-                                        </button>
                                         </span>
                                     </div>
                                 </form>

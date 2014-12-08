@@ -600,27 +600,35 @@ function addVideoTag(stream,participant){
 
     */
     var div = document.createElement('div');
-    div.className = 'video-container';
+    div.className = 'video-container videoUiWrapper';
     div.id = participant;
-    var $video = $('<video id="video'+ participant +'"" controls autoplay loop width="100%"></video>');
+    var videoID  = 'video'+ participant ;
+    var $video = $('<video id="'+videoID+'" width="100%" autoplay loop></video>');
     $(div).append($video);
 
     $('.person_name').append(participant);
 
-    var h2 = document.createElement('div');
-    h2.className = 'name-person';
-    //h2.innerHTML = participant;
-    div.appendChild(h2);
     $('#remote').append($(div));
 
 
-    var videoRemote = document.getElementById("video"+participant);
+    var videoRemote = document.getElementById(videoID);
     attachMediaStream(videoRemote,stream)
     /*var remoteVideos = document.getElementById('remote');
     var videoRemote = document.createElement('video');
     videoRemote.setAttribute('scr', stream);
     videoRemote.play();
     remoteVideos.appendChild(videoRemote);*/
+
+
+    $(videoID).videoUI({
+        'playMedia': false,
+        'progressMedia': false,
+        'timerMedia': false,
+        'volumeMedia':10,
+        'fullscreenMedia': true,
+        'autoHide':false,
+        'autoPlay': true
+    });
 }
 
 
