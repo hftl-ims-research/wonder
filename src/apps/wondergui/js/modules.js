@@ -90,6 +90,7 @@ hideModule = {
         $('#welcome_div').fadeOut('slow').addClass('hidden');
     },
     login: function () {
+        $('#domain-select').addClass("hidden");
         $('#login').addClass("hidden");
         $('.after_login').fadeIn("slow").removeClass("hidden");
         hideModule.start();
@@ -330,8 +331,8 @@ $(document).ready(function () {
         $(this).parent().parent().remove();
     });
 
-    $("#selectDomain").change(function () {
-        var domain = $(this).val();
+    $("#selectDomain li a").click(function () {
+        var domain = $(this).attr("domain");
         console.log('selected Domain: '+domain);
 
         switch(domain) {
