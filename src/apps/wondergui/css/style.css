@@ -26,3 +26,12 @@ body {
 #video_container .panel-body, #own_video_container .panel-body {
     padding: 0px;
 }
+.note-editor {
+    border: 0;
+}
+.note-editor .note-statusbar .note-resizebar {
+    border: 0;
+}
+.note-editor .note-toolbar {
+    border: 0;
+}

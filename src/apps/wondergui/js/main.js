@@ -592,12 +592,11 @@ function onData(code,msg) {
 
     $("#datachannelmessage").attr("value", "");
         $("#datachannelmessage").text("");
+    $("#textChat").animate({scrollTop: $("#textChat").height()}, 1000);
 }
 
 
 function sentMessageData(){
-
-
     //var messageText = $("#datachannelmessage .note-editor .note-editable p").val();
     var messageText = $('.summernote').code();
 

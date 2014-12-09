@@ -107,8 +107,8 @@ function showChatwindow() {
 
     $('.summernote').summernote({
         height: 100,                // set editor height
-        minHeight: 50,              // set minimum height of editor
-        maxHeight: 300,             // set maximum height of editor
+        minHeight: 20,              // set minimum height of editor
+        //maxHeight: 300,             // set maximum height of editor
         focus: true,                // set focus to editable area after initializing summernote
         toolbar: [
             /*
@@ -349,7 +349,9 @@ $(document).ready(function () {
 
      $("#send_message").click(function () {
         sentMessageData();
-
+        $(".note-editor .note-editable p").empty();
+        $(".note-editor textarea").focus();
+        $("#textChat").animate({scrollTop: $("#textChat").height()}, 1000);
         //do not submit the form:
         return false;
     });
