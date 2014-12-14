@@ -298,11 +298,16 @@ Conversation.prototype.acceptInvitation = function(recvInvitation, answerBody, c
                             console.log("define owner: ", that.owner)
                         }
                         participant.hosting = that.owner;
+                        
                         if(that.hosting == recvInvitation.from.rtcIdentity){
                             toIdentity.messagingStub = recvInvitation.from.messagingStub;
                         }
                         else{
-                            toIdentity.messagingStub = that.myParticipant.identity.messagingStub;
+                            // pendant to action in Conversation.prototype.bye
+                            // saves msgstub for that usage
+                            toIdentity.originalStub = toIdentity.messagingStub; //JHTEST
+				            toIdentity.messagingStub = that.myParticipant.identity.messagingStub;
+			    
                         }
 
 
@@ -499,6 +504,7 @@ Conversation.prototype.close = function() {
             element.sendMessage("",MessageType.BYE,"","",function(){},function(){});
             if(element.RTCPeerConnection.signalingState && element.RTCPeerConnection.signalingState != "closed")
                 element.RTCPeerConnection.close();
+	            //element.identity.messagingStub = element.identity.originalStub;
         });
         this.myParticipant.leave(false);
         this.setStatus(ConversationStatus.CLOSED);
@@ -515,8 +521,11 @@ Conversation.prototype.close = function() {
  */
 Conversation.prototype.bye = function() {
     this.participants.forEach(function(element,index,array){
-                                element.leave(true);
-                                delete array[index];
+            element.leave(true);
+            // reset the stub so a recall is possible after a called b, b hangs up, b calls again
+            // so it resolves 1 out of 4 possible szenarios
+            element.identity.messagingStub = element.identity.originalStub;
+            delete array[index];
     });
     this.myParticipant.leave(true);
     this.setStatus(ConversationStatus.CLOSED);
