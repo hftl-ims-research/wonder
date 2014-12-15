@@ -157,10 +157,12 @@ function initializeIMS() {
 
     console.log('Initializing...');
 
+    /*
     card = document.getElementById('card');
     localVideo = document.getElementById('localVideo');
     miniVideo = document.getElementById('miniVideo');
     remoteVideo = document.getElementById('remoteVideo');
+    */
 
     resetStatus();
     setStatus(myRtcIdentity);
@@ -210,10 +212,12 @@ function initialize() {
 
     console.log('Initializing...');
 
+    /*
     card = document.getElementById('card');
     localVideo = document.getElementById('localVideo');
     miniVideo = document.getElementById('miniVideo');
     remoteVideo = document.getElementById('remoteVideo');
+    */
 
     resetStatus();
     setStatus(myRtcIdentity);
@@ -671,8 +675,7 @@ function addVideoTag(stream,participant){
     videoRemote.play();
     remoteVideos.appendChild(videoRemote);*/
 
-
-    $(videoID).videoUI({
+    $("#"+videoID).videoUI({
         'playMedia': false,
         'progressMedia': false,
         'timerMedia': false,

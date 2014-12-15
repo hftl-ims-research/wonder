@@ -4,7 +4,7 @@
 //LOAD CONTACTS
 $('#contact_btn').click( function () {
     $('#contact_list').empty();
-    $('#contact_list').append('<li><a id="add_contact"><span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-user"></span> <span class="text" >Kontakt hinzufügen</span></a></li><li class="divider"></li>');
+    $('#contact_list').append('<li><a id="add_contact"><span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-user"></span> <span class="text" >Add a new contact</span></a></li><li class="divider"></li>');
     // contact handling
     $('#add_contact').click(function (){
         $('#modalAdContact').modal();

@@ -28,8 +28,8 @@
        // var widthController = "100%";
 
 
-        this.after('<div class="videoController container '+controllerClass+'"></div>');
-        $('.'+controllerClass).width(widthController);
+        this.after('<div class="videoController container-fluid '+controllerClass+'"></div>');
+        //$('.'+controllerClass).width(widthController);
 
         video.addEventListener("loadedmetadata", function() {
             duration = video.duration;
