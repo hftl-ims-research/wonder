@@ -108,10 +108,10 @@
                     <!-- logout-form -->
                     <form class="navbar-form navbar-left form-horizontal after_login hidden" id="logout" role="form">
                         <div class="form-group">
-                            <label for="logout_btn" class="col-md-8 col-sm-9 col-xs-8 control-label"><span class="glyphicon glyphicon-user"></span>  <span id="status"></span>
+                            <label for="logout_btn" class="col-md-8 col-sm-8 col-xs-8 control-label" id="status"><span class="glyphicon glyphicon-user hidden-sm"></span>
                             </label>
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                                <button class="btn btn-danger pull-right" id="logout_btn">Logout <span class="glyphicon glyphicon-log-out"></span>
+                                <button class="btn btn-danger pull-right" id="logout_btn"><span class="hidden-sm">Logout </span><span class="glyphicon glyphicon-log-out"></span>
                                 </button>
                             </div>
                         </div>
@@ -121,18 +121,17 @@
 
                 <ul class="nav navbar-nav navbar-right after_login hidden">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" id="contact_btn"><span class="glyphicon glyphicon-book"></span> Contacts <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" id="contact_btn"><span class="glyphicon glyphicon-book"></span><span class="hidden-sm"> Contacts </span><span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" id="contact_list">
-
                         </ul>
                     </li>
                     <!-- calling-form -->
                     <form class="navbar-form navbar-right  form-horizontal  after_login hidden" role="search">
                         <div class="form-group">
-                            <div class="col-md-7 col-sm-6 col-xs-8">
+                            <div class="col-md-7 col-sm-8 col-xs-8">
                                 <input type="text" class="form-control" autofocus id="callTo" placeholder="aliceORbob@nodejs.wonder">
                             </div>
-                            <div class="col-md-5 col-sm-6 col-xs-4">
+                            <div class="col-md-5 col-sm-4 col-xs-4">
                                 <div class="btn-group pull-right">
                                     <!--
                                     <button id="voice_call_btn" type="button" class="btn btn-success call_btn"><span class="glyphicon glyphicon-earphone"></span>
@@ -177,7 +176,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- video container -->
-            <div class="col-md-8 col-sm-12">
+            <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="panel panel-default hidden" id="video_container">
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-user"></span>
@@ -191,7 +190,7 @@
                 </div>
             </div>
             <!-- /.video container -->
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="row">
                     <!-- own_video container -->
                     <div class="col-md-12">

@@ -28,6 +28,7 @@ showModule = {
         $('#own_video_container').fadeIn("slow").removeClass("hidden");
         $('#video_container').fadeIn("slow").removeClass("hidden");
         $('#video_call_btn').addClass("active btn-danger");
+        $('#navigation').collapse('hide');
     },
     ownVideo: function () {
         $('#own_video_container').fadeIn("slow").removeClass("hidden");
