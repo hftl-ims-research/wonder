@@ -253,16 +253,18 @@ $(document).ready(function () {
     });
 
     //login and logout buttons
-    $("#loginButton, #imsLoginButton").click(function () {
+    $("#loginButton").click(function () {
         if (($("#loginButton").hasClass('btn-primary')) && (input_not_empty_check('#loginText') === true) ) {
             hideModule.login();
             initialize();
         }
     });
     $("#imsLoginButton").click(function () {
+        if ((input_not_empty_check('#imsPrivateId') === true) && (input_not_empty_check('#imsPublicId') === true) && (input_not_empty_check('#imsProxy') === true) && (input_not_empty_check('#imsPass') === true)){
             hideModule.login();
             initializeIMS();
             $('#modalIMS').modal('hide');
+        }
     });
     $("#logout_btn").click(function () {
         hangup();
@@ -378,6 +380,16 @@ function windowHeight() {
     }
 }
 
+function windowWidth() {
+    if (window.innerWidth) {
+        return window.innerWidth;
+    } else if (document.body && document.body.offsetWidth) {
+        return document.body.offsetWidth;
+    } else {
+        return 0;
+    }
+}
+
 function input_not_empty_check(element) {
     if ( $(element).val().length !== 0 ) {
         $(element).parent().removeClass('has-error');
@@ -388,3 +400,18 @@ function input_not_empty_check(element) {
         return false;
     }
 }
+
+/* swap elempents on mobile view */
+$(function() {
+    $(window).resize(function() {
+        var w = $(window).width();
+        if (w < 768) {
+            console.log("Window is smaller than 768px --> changing element order");
+            $('#call-block').before( $('#contact-block') );
+        } else if (w > 768) {
+            console.log("Window is bigger than 768px --> changing element order");
+            $('#call-block').after( $('#contact-block') );
+            //$('#B').prependTo( $('#column1') );
+        }
+    });
+});
