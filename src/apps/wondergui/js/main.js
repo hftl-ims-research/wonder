@@ -142,18 +142,24 @@ function initializeIMS() {
     /** HTML related code */
     var_init();
 
+    myRtcIdentity = $("#imsPrivateId").val()
+
     var credentials = new Object();
     var realmString = $("#imsPrivateId").val().split("@");
 
     credentials.user = $("#imsPrivateId").val();
     credentials.pubID = "sip:" + $("#imsPublicId").val() + "@" + realmString[1];
-    // credentials.role = $("#my_role").val();
+    credentials.role = "";
     credentials.pass = $("#imsPass").val();
     credentials.realm = realmString[1];
-    credentials.pcscf = $("#imsProxy").val() + ":" + $("#proxy_port").val();
+    credentials.pcscf = $("#imsProxy").val();
 
-    console.log("---->IMS-Credentials: "+credentials);
-    alert("test");
+    console.log("----> IMS-Credentials: ");
+    console.log("##### user: "+credentials.user);
+    console.log("##### pubID: "+credentials.pubID);
+    console.log("##### role: "+credentials.role);
+    console.log("##### pass: "+credentials.pass);
+    console.log("##### pcscf: "+credentials.pcscf);
 
     console.log('Initializing...');
 
@@ -172,17 +178,18 @@ function initializeIMS() {
     var idp = new Idp(myRtcIdentity);
 	var listener = this.onMessage.bind(this);
 
-	setInfo("TRYING to register as: " + myRtcIdentity);
+	console.log("TRYING to register as: " + myRtcIdentity);
 	idp.createIdentity(myRtcIdentity, function(identity) {
 		myIdentity = identity;
 		myIdentity.resolve(function(stub) {
 			stub.addListener(listener);
 			stub.connect(myRtcIdentity, credentials, function() {
 				$("#userID").text("Registered as: " + myIdentity.rtcIdentity);
-				setGUIState(GUI_STATES.REGISTERED, "connected as: " + myRtcIdentity);
+				//setGUIState(GUI_STATES.REGISTERED, "connected as: " + myRtcIdentity);
+                $('#modalIMS').modal('hide');
 			},
             function() {
-				setInfo("REGISTRATION FAILED - please check the given credentials!");
+				console.log("REGISTRATION FAILED - please check the given credentials!");
             });
 		},
         function(e) {
