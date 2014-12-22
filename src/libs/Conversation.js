@@ -495,7 +495,7 @@ Conversation.prototype.getStatus = function() {
  * @param {Message} message the final message to be sent to ALL participants of this conversation
  * @return {boolean} True if successful, false if the participant is not the owner.
  */
-Conversation.prototype.close = function() {
+Conversation.prototype.close = function() { // ich
     if(this.owner==this.myParticipant)
     {
         this.participants.forEach(function(element,index,array){
@@ -504,7 +504,7 @@ Conversation.prototype.close = function() {
             element.sendMessage("",MessageType.BYE,"","",function(){},function(){});
             if(element.RTCPeerConnection.signalingState && element.RTCPeerConnection.signalingState != "closed")
                 element.RTCPeerConnection.close();
-	            //element.identity.messagingStub = element.identity.originalStub;
+	            //element.identity.messagingStub = element.identity.originalStub; // has no effect
         });
         this.myParticipant.leave(false);
         this.setStatus(ConversationStatus.CLOSED);
