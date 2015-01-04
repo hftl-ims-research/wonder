@@ -1058,8 +1058,9 @@ Participant.prototype.leave = function(sendMessage) {
         this.dataBroker.removeDataChannel(this.identity);
         if(this.RTCPeerConnection.signalingState && this.RTCPeerConnection.signalingState != "closed")
             this.RTCPeerConnection.close(); // does not do anything
+        this.identity.messagingStub=this.identity.originalStub; //JHTEST
     }
-    //this.identity.messagingStub=this.identity.originalStub; //JHTEST
+    
 }
 
 
