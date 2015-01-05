@@ -243,13 +243,19 @@ $(document).ready(function () {
         if ( (!($(this).hasClass('active'))) && (input_not_empty_check('#callTo') === true)) {
             showModule.audio();
             doIndividualCall('audio');
-        } else hideModule.audio();
+        } else {
+            hideModule.audio();
+            hangup();
+        }
     });
     $("#video_call_btn").click(function () {
         if ((!($(this).hasClass('active'))) && (input_not_empty_check('#callTo') === true)) {
             showModule.video();
             doIndividualCall('audioVideo');
-        } else hideModule.av();
+        } else {
+            hideModule.av();
+            hangup();
+        }
     });
 
     //login and logout buttons
