@@ -147,7 +147,7 @@ Participant.prototype.createMyself = function(identity, resourceConstraints, rtc
     this.msgHandler = msgHandler;
 
     setStatus(ParticipantStatus.CREATED);   // @pchainho TODO: to catch errors   
-
+    // jumps simply over that on recall from callee
 
     var doGetUserMedia = false;
     var doDataChannel = false;
@@ -155,7 +155,6 @@ Participant.prototype.createMyself = function(identity, resourceConstraints, rtc
     var constraints = new Object();
     constraints.audio = false;
     constraints.video = false;
-
 
     // Create RTCPeerConnection 
     try {
@@ -784,7 +783,7 @@ Participant.prototype.sendMessage = function(messageBody, messageType, constrain
     if( messageBody == undefined){
         sdpConstraints = {'mandatory': {'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }};
     }else{
-        if(/^-?[\d.]+(?:e-?\d+)?$/.test(messageBody.peers)){
+        if(/^-?[\d.]+(?:e-?\d+)?$/.test(messageBody.peers)){ // false for conversation.bye in callee
             sdpConstraints = {'mandatory': {'OfferToReceiveAudio': true, 'OfferToReceiveVideo': false }};
         }
         else{
@@ -936,6 +935,7 @@ Participant.prototype.sendMessage = function(messageBody, messageType, constrain
             {
                 thisParticipant.identity.messagingStub.sendMessage(message);
                 setStatus(ParticipantStatus.NOT_PARTICIPATING); // TODO: CHECK IF ITS THE CORRECT STATE
+                // return false for callee in conservsation.bye
             }
             console.log("Call terminated");
             break;
@@ -1039,10 +1039,12 @@ Participant.prototype.sendMessage = function(messageBody, messageType, constrain
  */
 
 Participant.prototype.leave = function(sendMessage) {
-    setStatus(ParticipantStatus.PARTICIPATED);
+    setStatus(ParticipantStatus.PARTICIPATED); // false when conversation.bye()
     this.identity.messagingStub.removeListener("",this.identity.rtcIdentity,"");
+  
 
-    if(this.identity.rtcIdentity == this.me.identity.rtcIdentity){
+    
+    if(this.identity.rtcIdentity == this.me.identity.rtcIdentity){ // !true for callee
         this.RTCPeerConnection.getLocalStreams().forEach(function(element, index, array){
             array[index].stop();
         });
@@ -1055,8 +1057,10 @@ Participant.prototype.leave = function(sendMessage) {
         if(sendMessage==true) this.sendMessage("",MessageType.BYE,"","",function(){},function(){});
         this.dataBroker.removeDataChannel(this.identity);
         if(this.RTCPeerConnection.signalingState && this.RTCPeerConnection.signalingState != "closed")
-            this.RTCPeerConnection.close();
+            this.RTCPeerConnection.close(); // does not do anything
+        this.identity.messagingStub=this.identity.originalStub; //JHTEST
     }
+    
 }
 
 
