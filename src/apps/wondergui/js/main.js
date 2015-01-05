@@ -138,12 +138,7 @@ document.onreadystatechange = function(){
  *
  */
 
-function initializeIMS() {
-    /** HTML related code */
-    var_init();
-
-    myRtcIdentity = $("#imsPrivateId").val()
-
+function getIMScredentials (){
     var credentials = new Object();
     var realmString = $("#imsPrivateId").val().split("@");
 
@@ -161,6 +156,16 @@ function initializeIMS() {
     console.log("##### pass: "+credentials.pass);
     console.log("##### pcscf: "+credentials.pcscf);
 
+    localStorage.setItem("imsLoginCredentials", credentials);
+    return credentials;
+}
+
+function initializeIMS(localIMScredentials) {
+    /** HTML related code */
+    var_init();
+    var credentials = localIMScredentials;
+    myRtcIdentity = localIMScredentials.user;
+    console.log("Identity: "+myRtcIdentity);
     console.log('Initializing...');
 
     /*

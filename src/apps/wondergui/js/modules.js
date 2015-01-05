@@ -262,7 +262,8 @@ $(document).ready(function () {
     $("#imsLoginButton").click(function () {
         if ((input_not_empty_check('#imsPrivateId') === true) && (input_not_empty_check('#imsPublicId') === true) && (input_not_empty_check('#imsProxy') === true) && (input_not_empty_check('#imsPass') === true)){
             hideModule.login();
-            initializeIMS();
+            var localCredentials = getIMScredentials();
+            initializeIMS(localCredentials);
             $('#modalIMS').modal('hide');
         }
     });
@@ -343,7 +344,11 @@ $(document).ready(function () {
                 $('.nodejsLoginForm').removeClass('hidden');
                 break;
             case 'ims':
-                $('#modalIMS').modal();
+                if ( (localStorage.getItem("imsLoginCredentials") == null) || (localStorage.getItem("imsLoginCredentials") == "") ){
+                    $('#modalIMS').modal();
+                } else {
+                    initializeIMS(localStorage.getItem("imsLoginCredentials"));
+                }
                 $('.nodejsLoginForm').addClass('hidden');
                 break;
             default:
