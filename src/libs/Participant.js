@@ -160,7 +160,7 @@ Participant.prototype.createMyself = function(identity, resourceConstraints, rtc
     // Create RTCPeerConnection 
     try {
         // Create an RTCPeerConnection via the polyfill (adapter.js).
-        var pc = new RTCPeerConnection({'iceServers': new Array()});
+       var pc = new RTCPeerConnection({'iceServers': new Array()});
         this.RTCPeerConnection = pc;
         console.log('Created RTCPeerConnection.');
     }
@@ -204,7 +204,8 @@ Participant.prototype.createMyself = function(identity, resourceConstraints, rtc
 
                     pc.addStream(stream);
                     var resource = new Resource(resourceConstraints[numbResource -1]);
-                    resource.id=stream.id;
+                    //resource.id=stream.id;
+                    resource.stream=stream;//#####firefox-test#######################
                     //resource.constraint = resourceConstraints[numbResource];
                     console.log( resourceConstraints[numbResource]);
                     resource.constraint.constraints = {id: stream.id};
@@ -357,8 +358,9 @@ Participant.prototype.createRemotePeer = function(identity, myParticipant, conte
 
             if(media && constraints[ite].direction!="in" && (constraints[ite].type =="audioVideo" || constraints[ite].type =="audioMic" || constraints[ite].type =="screen")){
                 var resourceMedia = that.me.getResources(constraints[ite])[0];
-                var stream = that.me.RTCPeerConnection.getStreamById(resourceMedia.constraint.constraints.id);
-                pc.addStream(stream);
+                //var stream = that.me.RTCPeerConnection.getStreamById(resourceMedia.constraint.constraints.id);
+                //pc.addStream(stream);
+                pc.addStream(resourceMedia.stream);//#############firefox-test#####################
                 resourceMedia.connections.push(pc);
             }
 
@@ -1188,7 +1190,8 @@ Participant.prototype.addResource = function (resourceConstraints, message, call
                     if(!micAlready & !camAlready){
                         thisParticipant.RTCPeerConnection.addStream(stream);
                         var resource = new Resource(resourceConstraints);
-                        resource.id = stream.id;
+                       // resource.id = stream.id;
+                         resource.stream = stream;//#####firefox-test#######################
                         resource.constraint.constraints= {id: stream.id};
                         resource.connections.push(thisParticipant.RTCPeerConnection);
                         thisParticipant.resources.push(resource);
@@ -1196,12 +1199,14 @@ Participant.prototype.addResource = function (resourceConstraints, message, call
                     else{
                         if(micAlready){
                             var resource = thisParticipant.me.getResources("",ResourceType.AUDIO_MIC)[0];
-                            var stream2 = thisParticipant.RTCPeerConnection.getStreamById(resource.id);
+                           // var stream2 = thisParticipant.RTCPeerConnection.getStreamById(resource.id);
+                            var stream2 = resource.stream;//#####firefox-test#######################
                             stream2.addTrack(stream.getAudioTracks()[0]);
                         }
                         if(camAlready){
                             var resource = thisParticipant.me.getResources("",ResourceType.VIDEO_CAM)[0];
-                            var stream2 = thisParticipant.RTCPeerConnection.getStreamById(resource.id);
+                         // var stream2 = thisParticipant.RTCPeerConnection.getStreamById(resource.id);
+                             var stream2 = resource.stream;//#####firefox-test#######################
                             stream2.addTrack(stream.getVideoTracks()[0]);
                         }
                         resource.type=ResourceType.AUDIO_VIDEO;
@@ -1225,12 +1230,14 @@ Participant.prototype.addResource = function (resourceConstraints, message, call
                 else{
                     if(micAlready){
                         var resource = thisParticipant.me.getResources("",ResourceType.AUDIO_MIC)[0];
-                        var stream2 = thisParticipant.RTCPeerConnection.getStreamById(resource.id);
+                       // var stream2 = thisParticipant.RTCPeerConnection.getStreamById(resource.id);
+                         var stream2 = resource.stream;//#####firefox-test#######################
                         stream2.addTrack(stream.getAudioTracks()[0]);
                     }
                     if(camAlready){
                         var resource = thisParticipant.me.getResources("",ResourceType.VIDEO_CAM)[0];
-                        var stream2 = thisParticipant.RTCPeerConnection.getStreamById(resource.id);
+                      // var stream2 = thisParticipant.RTCPeerConnection.getStreamById(resource.id);
+                         var stream2 = resource.stream;//#####firefox-test#######################
                         stream2.addTrack(stream.getVideoTracks()[0]);
                     }
                     resource.type=ResourceType.AUDIO_VIDEO;
@@ -1370,7 +1377,9 @@ Participant.prototype.addResource = function (resourceConstraints, message, call
                     resourceMedia = this.me.getResources(resourceConstraints)[0];
                 }
 
-                var stream = this.me.RTCPeerConnection.getStreamById(resourceMedia[0].id);
+               // var stream = this.me.RTCPeerConnection.getStreamById(resourceMedia[0].id);
+                 var stream = resourceMedia.stream;
+
                 thisParticipant.RTCPeerConnection.addStream(stream);
                 var evt = new Object();
                 evt.stream = stream;

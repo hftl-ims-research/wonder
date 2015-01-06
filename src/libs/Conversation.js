@@ -197,11 +197,11 @@ Conversation.prototype.acceptRequest = function (request, callback, errorCallbac
 Conversation.prototype.acceptInvitation = function(recvInvitation, answerBody, callback, errorCallback) {
 
     // Swap direction because we are receiving
-    for(iteration=0;iteration<recvInvitation.body.constraints.length;iteration++){
+    for(iteration=0;iteration<recvInvitation.body.constraints.length;iteration++){ // no function?!
         if(recvInvitation.body.constraints[iteration].direction == "in"){
             recvInvitation.body.constraints[iteration].direction = "out";
         }
-        if(recvInvitation.body.constraints[iteration].direction == "out"){
+        else if(recvInvitation.body.constraints[iteration].direction == "out"){
             recvInvitation.body.constraints[iteration].direction = "in";
         }
     }
