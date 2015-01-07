@@ -31,6 +31,7 @@
         this.after('<div class="videoController container-fluid '+controllerClass+'"></div>');
         //$('.'+controllerClass).width(widthController);
 
+        /*
         video.addEventListener("loadedmetadata", function() {
             duration = video.duration;
 
@@ -47,7 +48,7 @@
             },100);
 
         });
-
+        */
 
 
         if(settings.progressMedia){

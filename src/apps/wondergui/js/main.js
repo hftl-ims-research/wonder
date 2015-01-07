@@ -670,7 +670,7 @@ function addVideoTag(stream,participant){
     var div = document.createElement('div');
     div.className = 'video-container videoUiWrapper';
     div.id = participant;
-    var videoID  = 'video'+ participant ;
+    var videoID  = 'video-'+ cleanID(participant) ;
     var $video = $('<video id="'+videoID+'" width="100%" autoplay loop></video>');
     $(div).append($video);
 
@@ -696,6 +696,14 @@ function addVideoTag(stream,participant){
         'autoHide':false,
         'autoPlay': true
     });
+
+    function cleanID(id) {
+        id = id.toUpperCase();
+        id = id.replace( /\=/ , "-");
+        id = id.replace( /\./ , "-");
+        id = id.replace( /\,/ , "-");
+        return id.replace( /[^a-zA-Z0-9]/ , "");
+    }
 }
 
 

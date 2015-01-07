@@ -250,8 +250,8 @@ $(document).ready(function () {
     });
     $("#video_call_btn").click(function () {
         if ((!($(this).hasClass('active'))) && (input_not_empty_check('#callTo') === true)) {
-            showModule.video();
             doIndividualCall('audioVideo');
+            showModule.video();
         } else {
             hideModule.av();
             hangup();
