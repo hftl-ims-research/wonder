@@ -223,7 +223,8 @@
             $('.'+controllerClass).css({
                 'position':'relative',
                 'left':'0',
-                'bottom':'0'
+                'bottom':'0',
+                'top':'-5px'
             });
         }
 
