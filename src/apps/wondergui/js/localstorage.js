@@ -1,6 +1,7 @@
 /* test data */
-var firstContact = '"'+getUniqueId()+'": {"name": "Doe", "surname": "Bob", "logindata": "bob@nodejs.wonder"}';
-var initialdata = '{"contacts": {'+firstContact+'}}';
+var firstContact = '"'+getUniqueId()+'": {"name": "Sanders", "surname": "Bob", "logindata": "bob@nodejs.wonder"}';
+var secondContact = '"'+getUniqueId()+'": {"name": "Henderson", "surname": "Alice", "logindata": "alice@nodejs.wonder"}';
+var initialdata = '{"contacts": {'+firstContact+','+secondContact+'}}';
 
 if (localStorage.getItem("contacts") === null){
     localStorage.setItem("contacts", initialdata);

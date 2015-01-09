@@ -86,11 +86,11 @@
             });
 
         }
-
+/*
         if(settings.autoPlay){
             video.play()
         }
-
+*/
         this.bind('click',function(){
             $(this).hasClass('pauseMedia') ?  video.pause() :  video.play();
             $(this).children('span').toggleClass('glyphicon glyphicon-pause');
