@@ -265,10 +265,11 @@ function doCall() {
     for(var i = 0; i<peers.length; i++){
         peersString = peersString + " - " + peers[i];
     }
-    $("#callingModal").text("Calling: " + peersString);
-    $('#modalInviting').modal('show');
-
-    document.getElementById('callSound').play();
+    if (constraints[0].type != "chat"){
+        $("#callingModal").text("Calling: " + peersString);
+        $('#modalInviting').modal('show');
+        document.getElementById('callSound').play();
+    }
     conversation.open(peers, "", constraints, invitation, function(){}, function(){});
 
 }
@@ -432,33 +433,51 @@ function onMessage(message) {
             var that = this;
             var Acceptbtn = document.getElementById('AcceptButton');
             //$('#modalInvite').modal({backdrop: 'static'}).modal('show');
-            $("#receivingModal").text(message.from.rtcIdentity + " is trying to call you..");
-            $('#modalInvite').modal('show');
-            document.getElementById('ringingSound').play();
             /*var conf = confirm("Incoming call from: " + message.from.rtcIdentity + " Accept?");
+
             if (conf == true)
             {
                 /*  Create new conversation */
+            for(var i=0; i< message.body.constraints.length; i++){
+                if(message.body.constraints[i].type == 'audioVideo') {
+                    $("#receivingModal").text(message.from.rtcIdentity + " wants to have a video conversation with you.");
+                    document.getElementById('ringingSound').play();
+                    $('#modalInvite').modal('show');
+                }
+                if(message.body.constraints[i].type == 'audio') {
+                    $("#receivingModal").text(message.from.rtcIdentity + " is trying to call you..");
+                    document.getElementById('ringingSound').play();
+                    $('#modalInvite').modal('show');
+                }
+                if(message.body.constraints[i].type == 'chat') {
+                    //$("#receivingModal").text(message.from.rtcIdentity + " wants to chat with you.");
+                    showModule.chat();
+                    conversation = new Conversation(myIdentity, that.onRTCEvt.bind(that), that.onMessage.bind(that), iceServers, constraints);
+                conversation.acceptInvitation(message, "", function(){}, function(){});
+                }
+                if(message.body.constraints[i].type == 'file') {
+                    $("#receivingModal").text(message.from.rtcIdentity + " wants to send you a file.");
+                    $('#modalInvite').modal('show');
+                }
+            }
+
+
+
             Acceptbtn.onclick = function(){
-                //document.getElementById('hangup').style.visibility = 'visible';
-                //document.getElementById('call').style.visibility = 'hidden';
                 for(var i=0; i< message.body.constraints.length; i++){
                     if(message.body.constraints[i].type == 'audioVideo') {
-                        //document.getElementById('updateConversation').style.visibility = 'hidden';
                         showModule.video();
                         showModule.audio();
                         showModule.ownVideo();
                     }
                     if(message.body.constraints[i].type == 'audio') {
-                        //document.getElementById('chat').style.visibility = 'visible';
                         showModule.audio();
                     }
                     if(message.body.constraints[i].type == 'chat') {
-                        //document.getElementById('chat').style.visibility = 'visible';
                         showModule.chat();
                     }
                     if(message.body.constraints[i].type == 'file') {
-                        //document.getElementById('fileSharing').style.visibility = 'visible';
+                        showModule.chat();
                     }
                 }
                 $('#modalInvite').modal('hide');
