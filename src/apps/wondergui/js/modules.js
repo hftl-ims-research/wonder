@@ -357,6 +357,7 @@ $(document).ready(function () {
                     initializeIMS(cred);
                 }
                 $('.nodejsLoginForm').addClass('hidden');
+                hideModule.login();
                 break;
             default:
                 ;

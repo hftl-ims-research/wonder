@@ -1,7 +1,10 @@
 /* test data */
 var firstContact = '"'+getUniqueId()+'": {"name": "Sanders", "surname": "Bob", "logindata": "bob@nodejs.wonder"}';
 var secondContact = '"'+getUniqueId()+'": {"name": "Henderson", "surname": "Alice", "logindata": "alice@nodejs.wonder"}';
-var initialdata = '{"contacts": {'+firstContact+','+secondContact+'}}';
+var thirdContact = '"'+getUniqueId()+'": {"name": "IMS", "surname": "6505550527", "logindata": "6505550527@snc-cw.tlabs.de"}';
+var fourthContact = '"'+getUniqueId()+'": {"name": "IMS", "surname": "6505550347", "logindata": "6505550347@snc-cw.tlabs.de"}';
+
+var initialdata = '{"contacts": {'+firstContact+','+secondContact+','+thirdContact+','+fourthContact+'}}';
 
 if (localStorage.getItem("contacts") === null){
     localStorage.setItem("contacts", initialdata);
