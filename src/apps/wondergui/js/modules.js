@@ -350,10 +350,11 @@ $(document).ready(function () {
                 $('.nodejsLoginForm').removeClass('hidden');
                 break;
             case 'ims':
-                if ( (localStorage.getItem("imsLoginCredentials") == null) || (localStorage.getItem("imsLoginCredentials") == "") ){
+                var cred = JSON.parse(localStorage.getItem("imsLoginCredentials"));
+                if ( ( cred == null) || (localStorage.getItem("imsLoginCredentials") == "") ){
                     $('#modalIMS').modal();
                 } else {
-                    initializeIMS(localStorage.getItem("imsLoginCredentials"));
+                    initializeIMS(cred);
                 }
                 $('.nodejsLoginForm').addClass('hidden');
                 break;

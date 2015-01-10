@@ -156,7 +156,7 @@ function getIMScredentials (){
     console.log("##### pass: "+credentials.pass);
     console.log("##### pcscf: "+credentials.pcscf);
 
-    localStorage.setItem("imsLoginCredentials", credentials);
+    localStorage.setItem("imsLoginCredentials", JSON.stringify(credentials));
     return credentials;
 }
 
