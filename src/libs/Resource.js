@@ -20,11 +20,12 @@
 
 function Resource( resourceConstraint, codec ) {
 
-  this.constraint = resourceConstraint;      
+  this.constraint = resourceConstraint;
   this.connections = new Array();
   this.owner;
+  this.stream;
     
-  if(codec) 
+  if(codec)
   {
       this.codec = codec;
       this.constraint.constraints=codec;
