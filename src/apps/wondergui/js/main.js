@@ -265,7 +265,8 @@ function doCall() {
     for(var i = 0; i<peers.length; i++){
         peersString = peersString + " - " + peers[i];
     }
-    if (constraints[0].type != "chat"){
+    console.log("sending constraints: ", constraints);
+    if ((constraints[0].type == "audioVideo")){
         $("#callingModal").text("Calling: " + peersString);
         $('#modalInviting').modal('show');
         document.getElementById('callSound').play();
@@ -317,6 +318,7 @@ function onMessage(message) {
     switch (message.type) {
 
         case MessageType.ACCEPTED:
+            console.log("received new constraints: ",constraints);
             $('#modalInviting').modal('hide');
             document.getElementById('callSound').pause();
             //document.getElementById('call').style.visibility = 'hidden';
@@ -411,12 +413,14 @@ function onMessage(message) {
                 while(divChat.firstChild){
                     divChat.removeChild(divChat.firstChild);
                 }
+                hideModule.av();
                 var_init();
             }
 
             if (conversation != null && conversation.getStatus() === ConversationStatus.CLOSED) {
                 localVideo.src = '';
                 conversation = null;
+                hideModule.av();
                 var_init();
             }
 
@@ -477,7 +481,7 @@ function onMessage(message) {
                         showModule.chat();
                     }
                     if(message.body.constraints[i].type == 'file') {
-                        showModule.chat();
+                        //document.getElementById('fileSharing').style.visibility = 'visible';
                     }
                 }
                 $('#modalInvite').modal('hide');
@@ -575,14 +579,14 @@ function onRTCEvt(event, evt) {
             codecChat=evt.codec;
             conversation.dataBroker.addCodec(codecChat);
             codecChat.addListener(onData);
-            //showModule.chat();
+            showModule.chat();
         }
         if(evt.codec.type=="file"){
             codecIDFile = evt.codec.id;
             codecFile=evt.codec;
             conversation.dataBroker.addCodec(codecFile);
             codecFile.addListener(onData);
-            //document.getElementById('fileSharing').style.visibility = 'visible';
+            showModule.chat();
         }
         break;
     case 'onaddlocalstream':
