@@ -147,7 +147,6 @@ Participant.prototype.createMyself = function(identity, resourceConstraints, rtc
     this.msgHandler = msgHandler;
 
     setStatus(ParticipantStatus.CREATED);   // @pchainho TODO: to catch errors   
-    // jumps simply over that on recall from callee
 
     var doGetUserMedia = false;
     var doDataChannel = false;
@@ -937,7 +936,6 @@ Participant.prototype.sendMessage = function(messageBody, messageType, constrain
             {
                 thisParticipant.identity.messagingStub.sendMessage(message);
                 setStatus(ParticipantStatus.NOT_PARTICIPATING); // TODO: CHECK IF ITS THE CORRECT STATE
-                // return false for callee in conservsation.bye
             }
             console.log("Call terminated");
             break;
@@ -1043,8 +1041,6 @@ Participant.prototype.sendMessage = function(messageBody, messageType, constrain
 Participant.prototype.leave = function(sendMessage) {
     setStatus(ParticipantStatus.PARTICIPATED); // false when conversation.bye()
     this.identity.messagingStub.removeListener("",this.identity.rtcIdentity,"");
-  
-
     
     if(this.identity.rtcIdentity == this.me.identity.rtcIdentity){ // !true for callee
         this.RTCPeerConnection.getLocalStreams().forEach(function(element, index, array){
@@ -1060,7 +1056,7 @@ Participant.prototype.leave = function(sendMessage) {
         this.dataBroker.removeDataChannel(this.identity);
         if(this.RTCPeerConnection.signalingState && this.RTCPeerConnection.signalingState != "closed")
             this.RTCPeerConnection.close(); // does not do anything
-        this.identity.messagingStub=this.identity.originalStub; //JHTEST
+        this.identity.messagingStub=this.identity.originalStub; // makes recall possible
     }
     
 }

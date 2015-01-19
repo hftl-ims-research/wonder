@@ -85,7 +85,10 @@ Identity.prototype.resolveMyApp = function() {
 Identity.prototype.resolve = function( callback ) {
 	var that = this;
 	console.log( "resolving identity: " + this.rtcIdentity);
-	if ( ! this.messagingStub || ! this.messagingStub.impl ) { // if messagingStub is not present, Skript will fail so a "smart" OR is required as done here
+	if ( ! this.messagingStub || ! this.messagingStub.impl ) { 
+        // if messagingStub is not present, the Skript will fail
+        // so an OR which breaks further instructions is required as done here
+        
 		// not resolved yet --> let's ask Idp for a stub with the same downloadUri
 		var knownStub = Idp.getInstance().getResolvedStub(this.messagingStubLibUrl);
 		if ( knownStub) {
