@@ -599,6 +599,7 @@ function resetStatus() {
 
 function onData(code,msg) {
         console.log(msg);
+        showModule.chat();
 
         var iDiv = document.getElementById('textChat');
 
