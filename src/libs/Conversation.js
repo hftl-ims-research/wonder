@@ -495,7 +495,7 @@ Conversation.prototype.getStatus = function() {
  * @param {Message} message the final message to be sent to ALL participants of this conversation
  * @return {boolean} True if successful, false if the participant is not the owner.
  */
-Conversation.prototype.close = function() { // ich
+Conversation.prototype.close = function() { // my participant does that
     if(this.owner==this.myParticipant)
     {
         this.participants.forEach(function(element,index,array){
