@@ -35,6 +35,11 @@ showModule = {
         $('#video_container').fadeIn("slow").removeClass("hidden");
         $('#video_call_btn').addClass("active btn-danger");
     },
+    av: function () {
+        showModule.audio();
+        showModule.video();
+        showModule.ownVideo();
+    },
     chat: function () {
         $('#open_chat_btn').addClass("active btn-primary");
         showChatwindow();
