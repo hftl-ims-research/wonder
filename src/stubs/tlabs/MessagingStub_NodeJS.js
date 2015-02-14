@@ -109,8 +109,9 @@ MessagingStub_NodeJS.prototype.connect = function(ownRtcIdentity, credentials, c
 	// by contextId
 	this.websocket.onmessage = function(full_message) {
 		// IF it doesnt have contextID, it is the application.
+
 		var message = JSON.parse(full_message.data).body;
-        
+        console.log("Received: ", message);  //#############firefox-test#####################
 		Idp.getInstance().createIdentity(message.from, function(identity) {
 			message.from = identity;
 
