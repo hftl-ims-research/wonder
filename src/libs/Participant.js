@@ -739,9 +739,19 @@ Participant.prototype.onMessage = function(message) {
             // IF GETS HERE IT IS NORMAL FOR THE MULTIPARTY
             var mediaConstraints = message.body.constraints;
             var description = new RTCSessionDescription(message.body.connectionDescription);
-            this.RTCPeerConnection.setRemoteDescription(description, onSetSessionDescriptionSuccess, onSetSessionDescriptionError);
+            //#############################################firefox####################################################
+            /*this.RTCPeerConnection.setRemoteDescription(description, onSetSessionDescriptionSuccess, onSetSessionDescriptionError);
 
-            this.sendMessage(answerBody, MessageType.ACCEPTED, mediaConstraints);
+            this.sendMessage(answerBody, MessageType.ACCEPTED, mediaConstraints);*/ ///function^^ nach succes setremotedescription
+           var that=this;
+            this.RTCPeerConnection.setRemoteDescription(description, function() {
+            console.log("sendMasg try");
+                that.sendMessage(answerBody, MessageType.ACCEPTED, mediaConstraints);
+                console.log("sendMasg Done");
+            }, onSetSessionDescriptionError);
+
+
+            //#############################################firefox####################################################
             //this.msgHandler(message);
             break;
         case MessageType.RESOURCE_REMOVED:
@@ -756,6 +766,7 @@ Participant.prototype.onMessage = function(message) {
             break;
     }
 }
+
 
 
 /** @ignore */
