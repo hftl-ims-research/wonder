@@ -741,16 +741,13 @@ Participant.prototype.onMessage = function(message) {
             var description = new RTCSessionDescription(message.body.connectionDescription);
             //#############################################firefox####################################################
             /*this.RTCPeerConnection.setRemoteDescription(description, onSetSessionDescriptionSuccess, onSetSessionDescriptionError);
-
             this.sendMessage(answerBody, MessageType.ACCEPTED, mediaConstraints);*/ ///function^^ nach succes setremotedescription
            var that=this;
             this.RTCPeerConnection.setRemoteDescription(description, function() {
-            console.log("sendMasg try");
+            console.log("sendMsg try");
                 that.sendMessage(answerBody, MessageType.ACCEPTED, mediaConstraints);
-                console.log("sendMasg Done");
+                console.log("sendMsg Done");
             }, onSetSessionDescriptionError);
-
-
             //#############################################firefox####################################################
             //this.msgHandler(message);
             break;
