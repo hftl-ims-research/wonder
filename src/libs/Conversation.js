@@ -324,13 +324,18 @@ Conversation.prototype.acceptInvitation = function(recvInvitation, answerBody, c
                         console.log("toIdentity.rtcIdentity ", toIdentity.rtcIdentity);//debugger
                         if (recvInvitation.from.rtcIdentity == toIdentity.rtcIdentity) {
                             //Only do the RTCPeerConnection to the identity that is inviting
-                            //for the other identities only creates the participants
-                            var description = new RTCSessionDescription(recvInvitation.body.connectionDescription);
-                            participant.RTCPeerConnection.setRemoteDescription(description, function () { //##########firefox-test#############
-                                participant.connectStub(function () {
-                                    participant.sendMessage(answerBody, MessageType.ACCEPTED, constraints, callback, errorCallback);
-                                });
-                            } , onSetSessionDescriptionError);
+        //for the other identities only creates the participants
+        var description = new RTCSessionDescription(recvInvitation.body.connectionDescription);
+        participant.RTCPeerConnection.setRemoteDescription(description, function () { //##########firefox-test#############
+                    participant.connectStub(function () {
+                        participant.sendMessage(answerBody, MessageType.ACCEPTED, constraints, callback, errorCallback);
+                    });
+                }, function () {
+                    console.log("can't set RemoteDescription") //##########firefox-test#############
+                    participant.connectStub(function () {
+                        participant.sendMessage(answerBody, MessageType.ACCEPTED, constraints, callback, errorCallback);
+                    });
+                });
                         }
 
                  },
