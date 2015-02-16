@@ -117,6 +117,10 @@ function showChatwindow() {
         minHeight: 20,              // set minimum height of editor
         //maxHeight: 300,             // set maximum height of editor
         focus: true,                // set focus to editable area after initializing summernote
+        onImageUpload: function(files, editor, welEditable) {
+        //callback for image upload
+                sentMessageDataFile(files[0], editor, welEditable);
+        },
         toolbar: [
             /*
             [
@@ -424,7 +428,6 @@ $(function() {
     $(window).resize(function() {
         var w = $(window).width();
         if (w < 768) {
-            console.log("Window is smaller than 768px --> changing element order");
             $('#call-block').before( $('#contact-block') );
         } else if (w > 768) {
             console.log("Window is bigger than 768px --> changing element order");
