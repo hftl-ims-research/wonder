@@ -12,23 +12,22 @@
 /**
  * @class
  * The Resource class represents the digital assets that are shared among participants in the conversation.
- * 
+ *
  * @param {ResourceConstraint} resourceConstraint - Constraints of the Resource. Object with the following syntax {type: ResourceType, constraints: codec or MediaStreamConstraints}
  * @param {Codec} [codec] - For data types only, Codec used.
  *
  */
 
-function Resource( resourceConstraint, codec ) {
+function Resource(resourceConstraint, codec) {
 
   this.constraint = resourceConstraint;
   this.connections = new Array();
   this.owner;
   this.stream;
-    
-  if(codec)
-  {
-      this.codec = codec;
-      this.constraint.constraints=codec;
+
+  if (codec) {
+    this.codec = codec;
+    this.constraint.constraints = codec;
   }
 }
 
@@ -48,21 +47,21 @@ function Resource( resourceConstraint, codec ) {
     var thisresource = this;
     // Question: how to handle the creation of PeerConnections and add local MediaStreams? do we need them stored at each Resource having Tracks from this stream??
     // TODO: add stream attribute and rename "stream" to "streamTrack"
- 	
+
     /**
      * private method setStream
      *
      * @param stream..
      */
- /*   setStream = function(stream){
-        thisresource.stream = stream;
-    }
+/*   setStream = function(stream){
+       thisresource.stream = stream;
+   }
 
-    /**
-     * private method setData
-     *
-     * @param data
-     */
+   /**
+    * private method setData
+    *
+    * @param data
+    */
 /*    setData = function(data){
       thisresource.data = data;
     };
@@ -138,13 +137,13 @@ function Resource( resourceConstraint, codec ) {
             thisresource.status = status;
             break;
       }
-       
+
     }
 };
 
 /**
  * createStream
- * 
+ *
  * @param owner  : Participant ... owner of the stream
  * @param stream : MediaStream ... the stream
  * @param type   : ResourceType... type of resource
@@ -166,7 +165,7 @@ function Resource( resourceConstraint, codec ) {
 
 /**
  * getStatus
- * 
+ *
  * @returns ResourceStatus ... returns the resource status
  */
 /*Resource.prototype.getStatus = function(){
@@ -176,22 +175,22 @@ function Resource( resourceConstraint, codec ) {
 
 /**
  * destroy
- * 
+ *
  */
 /*Resource.prototype.stop = function(){
-// @pchainho TODO: only applicable for local Resources. 
+// @pchainho TODO: only applicable for local Resources.
 
     this.stream = null;
     //this.setStatus(ResourceStatus.ENDED); // @pchainho I guess this should only be done when "ended" event is fired. To study how to address Data Channel resources
-	
+
 	// TODO: depending on the type of the Resource it may imply the invocation of browser APIs eg for MediaStreamTracks call its operation stop()
 };
 
 /**
  * share
- * 
+ *
  * @param shared : Boolean ... establishes if the resource is shared or not
- * 
+ *
  */
 /*Resource.prototype.share = function(shared){
 // @pchainho TODO: only applicable for local Resources. For MediaStreamTracks call its operation stop()
@@ -203,7 +202,7 @@ function Resource( resourceConstraint, codec ) {
 
 /**
  * record
- * 
+ *
  */
 /*Resource.prototype.record = function(){
     // TODO Complete the function
@@ -211,9 +210,9 @@ function Resource( resourceConstraint, codec ) {
 
 /**
  * play
- * 
+ *
  * @param timing : Number ... the time to start playing
- * 
+ *
  */
 /*Resource.prototype.play = function(timing){
     // this.status = ResourceStatus.PLAYING;
@@ -222,7 +221,7 @@ function Resource( resourceConstraint, codec ) {
 
 /**
  * pause
- * 
+ *
  */
 /*Resource.prototype.pause = function(){
     // this.status = ResourceStatus.PAUSED;
@@ -230,10 +229,10 @@ function Resource( resourceConstraint, codec ) {
 
 /**
  * create
- * 
+ *
  * @param owner : Participant ... specifies the owner of the resource
  * @param type  : ResourceType ... specifies the resource type
- * 
+ *
  */
 /*Resource.prototype.create = function(owner, type){
     if(! owner || ! type)return ;
@@ -244,15 +243,15 @@ function Resource( resourceConstraint, codec ) {
         this.setStatus(ResourceStatus.NEW);
     }
     // TODO  Where/how to assign the stream,data,connection,evtHandler and status?
-};  
+};
 
 /**
  * createData
- * 
+ *
  * @param owner : Participant ... specifies the owner of the resource
  * @param type  : ResourceType ... specifies the resource type
  * @param data  : DataChannel ... specifies the data channel
- * 
+ *
  */
 /*Resource.prototype.createData = function(owner, type, data){
 
@@ -278,7 +277,8 @@ function Resource( resourceConstraint, codec ) {
  * EventHandler
  *
  * @param that
- *//*
+ */
+/*
 function mute(self){
 
 }
@@ -287,7 +287,8 @@ function mute(self){
  * EventHandler
  *
  * @param that
- *//*
+ */
+/*
 function unmute(self){
 
 }
@@ -296,7 +297,8 @@ function unmute(self){
  * EventHandler
  *
  * @param that
- *//*
+ */
+/*
 function overconstrained(self){
 
 }
@@ -306,7 +308,7 @@ function overconstrained(self){
  *
  * @param that
  */
- /*
+/*
 function ended(that){
 
 }*/

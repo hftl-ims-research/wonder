@@ -1,2 +1,3 @@
 src/apps/PushApplication/
 src/apps/WonderApp/
+src/apps/**/domain.js

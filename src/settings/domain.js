@@ -2,13 +2,12 @@
 // Should be colocated with Vertx server.java
 
 
-var idp_options =
-        {
-                protocol : "http",
-                domain : "127.0.0.1",
-                port : '8080',
-                path: "idp_php/index.php?jsonp=returnIdentity&filter_rtcIdentity="
-        };
+var idp_options = {
+  protocol: "http",
+  domain: "127.0.0.1",
+  port: '8080',
+  path: "idp_php/index.php?jsonp=returnIdentity&filter_rtcIdentity="
+};
 
 
 // IDP options for websockets, if nothing is given on application layer
@@ -36,7 +35,6 @@ var idp_options  = {
 
 // Address of Vertx WONDER Message Server
 
-vertx_settings =
-	{
-    address: "https://"+idp_options.domain + ":4443/eventbus"
-	}
+vertx_settings = {
+  address: "https://" + idp_options.domain + ":4443/eventbus"
+}

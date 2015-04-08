@@ -10,14 +10,14 @@
 
 /**
  * Class DataMessage
- * creates all the json associated to the codecs messages 
+ * creates all the json associated to the codecs messages
  * @class
  */
 
-function DataMessage (codecId, to, body){
+function DataMessage(codecId, to, body) {
 
 
-	this.codecId = codecId;
-	this.to = to; //in case empty it sends the message to all clients
-	this.body = body;
+  this.codecId = codecId;
+  this.to = to; //in case empty it sends the message to all clients
+  this.body = body;
 }
