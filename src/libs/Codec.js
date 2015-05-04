@@ -18,9 +18,7 @@
 /**
  * @class
  * Codec Class
- *
  */
-
 function Codec(type, CodecLibUrl, dataBroker) {
   this.listeners = [];
   this.id = guid();
@@ -34,11 +32,11 @@ function Codec(type, CodecLibUrl, dataBroker) {
 }
 
 
+
 /**
  * send function
  * @param.. input
  */
-
 Codec.prototype.send = function(input) {
   var aux = JSON.parse(input);
   //How to change the mimetype of input.body is equal to this.mimetype
@@ -82,21 +80,17 @@ Codec.prototype.send = function(input) {
  * getReport function
  * @param.. reportHandler
  */
-
 Codec.prototype.getReport = function(reportHandler) {
-
-  //??
-
+  //
 }
+
 
 
 /**
  * onData function
  * @param.. dataMsg
  */
-
 Codec.prototype.onData = function(dataMsg) {
-
   //take data and treat it
   console.log(this.listeners);
   if (this.type == "chat") {
@@ -114,45 +108,40 @@ Codec.prototype.onData = function(dataMsg) {
 }
 
 
+
 /**
  * addListener function
  * @param.. listener
  */
-
 Codec.prototype.addListener = function(listener) {
-
   this.listeners.push(listener);
-
 }
+
 
 
 /**
  * removeListener function
  * @param.. listener
  */
-
 Codec.prototype.removeListener = function(listener) {
-
   var index = 0;
   if (this.listeners.indexOf(listener, index) !== -1) {
     index = this.listeners.indexOf(listener, index);
     this.listeners.splice(index, 1);
   }
-
-
 }
+
 
 
 /**
  * setDataBroker function
  * @param.. listener
  */
-
 Codec.prototype.setDataBroker = function(dataBroker) {
-
   this.dataBroker = dataBroker;
-
 }
+
+
 
 /**
  * save file to local Disk

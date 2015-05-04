@@ -40,4 +40,3 @@ echo "creating $outFull ..."
 cat wonder_core.js wonder_conversation.js > wonder_full.js
 echo "all done"
 ls -l wonder_*.js
-

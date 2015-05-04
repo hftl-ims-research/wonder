@@ -9,9 +9,10 @@
  */
 
 
+
 /**
- * @class
- * Message - This class is a data-holder for all messages that are sent between the domains.
+ * @class Message - This class is a data-holder for all messages that are sent between the domains.
+ *
  * @param {Identity} from - Sender of the message
  * @param {Identity[]} [to] - Recipients of the message
  * @param {MessageBody} body - Message body (a json struct)
@@ -19,19 +20,17 @@
  * @param  {string} [context] - ID of the conversation. (Optional. For conversation related messages it is mandatory.)
  */
 function Message(from, to, body, type, context) {
-  // generate unique id for this message
-  this.id = guid();
+  this.id = guid(); // generate unique id for this message
   this.from = from;
   this.to = to;
   this.body = body;
   this.type = type;
-
-  // Optional. For conversation related messages it is mandatory
-  this.contextId = context;
-
+  this.contextId = context; // Optional. For conversation related messages it is mandatory
   this.reply_to_uri;
   this.previous;
 }
+
+
 
 /**
  * @ignore
@@ -47,8 +46,8 @@ function Message(from, to, body, type, context) {
 Message.prototype.newReplyMessage = function(body, previousMessage, type, me) {
   if (!previousMessage || !body || !type)
     return;
+
   // create a new message with swapped from and to fields (taken from previous message)
-  // DONE: take Myself as from, take all previous.to - ME plus original sender as to
   var to = new Array();
 
   // Take all previous to - ME
@@ -60,8 +59,8 @@ Message.prototype.newReplyMessage = function(body, previousMessage, type, me) {
   // + original sender
   to.push(previousMessage.from);
 
-  var rm = new Message(me, to, body, type);
-  rm.previous = previousMessage;
-  rm.reply_to_uri = me;
-  return (rm);
+  var returnMessage = new Message(me, to, body, type);
+  returnMessage.previous = previousMessage;
+  returnMessage.reply_to_uri = me;
+  return returnMessage;
 };

@@ -25,6 +25,7 @@ function MessagingStub() {
 }
 
 
+
 MessagingStub.prototype.setImpl = function(stubImplementation) {
   this.impl = stubImplementation;
   // put a ref to the base stub into the impl
@@ -34,6 +35,7 @@ MessagingStub.prototype.setImpl = function(stubImplementation) {
 /** @ignore
  *
  * addListener - Adds a listener. If the listener exists with the same contextID, doesn't add it again.
+ *
  * @param {StubEvtHandler} listener - Listener to execute its do(message) when a new message arrives.
  * @param {URI} [rtcIdentity] - The RTCIdentity of the Identity to be notified. (optional)
  * @param {string} [contextId] - The ID of the context to be notified. If not specified it will receive invitation messages and messages without contextID. (optional)
@@ -70,6 +72,7 @@ MessagingStub.prototype.addListener = function(listener, rtcIdentity, contextId)
 };
 
 
+
 /**
  * sendMessage - Sends the specified message.
  * @param {Message} message - Message to send.
@@ -81,6 +84,7 @@ MessagingStub.prototype.sendMessage = function(message) {
     console.log(this.message);
   }
 };
+
 
 
 /**
@@ -115,6 +119,8 @@ MessagingStub.prototype.removeListener = function(listener, rtcIdentity, context
     }
   }
 };
+
+
 
 /**
  * Creates the connection, connects to the server and establish the callback to the listeners on new message.

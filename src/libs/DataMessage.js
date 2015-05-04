@@ -15,8 +15,6 @@
  */
 
 function DataMessage(codecId, to, from, body) {
-
-
   this.codecId = codecId;
   this.to = to; //in case empty it sends the message to all clients
   this.body = body;

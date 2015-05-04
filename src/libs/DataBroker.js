@@ -13,8 +13,6 @@
  * @class
  */
 function DataBroker() {
-
-  //constructor DataBroker
   this.codecs = [];
   this.channels = [];
 }
@@ -24,11 +22,9 @@ function DataBroker() {
  */
 
 DataBroker.prototype.onDataChannelEvt = function(msg) {
-
   var that = this;
   console.log(msg);
-  /*console.log(this.codecs);
-	console.log(this.channels);*/
+
   for (var i = 0; i < this.channels.length; i++) {
     this.channels[i].channel.onmessage = function(msg) {
       var msgObject = JSON.parse(msg.data);
@@ -47,84 +43,59 @@ DataBroker.prototype.onDataChannelEvt = function(msg) {
     }
   }
 
-  /*this.channels[0].channel.onmessage = function(msg){
-		var msgObject = JSON.parse(msg.data);
-		that.codecs[0].onData(msgObject)
-		/*for(var i = 0; i < that.codecs.length; i++){
-			if( that.codecs[i].id == msgObject.codecId )
-
-		}
-	}
-
-
-
-
-	this.channels[0].channel.onmessage = function(msg){
-		for(var i = 0; i < that.codecs.length; i++){
-			if( that.codecs[i].id == msgObject.codecId )
-
-		}*/
-
-
 }
+
+
 
 /**
  * addCodec
  */
-
 DataBroker.prototype.addCodec = function(codec) {
   console.log("ADDD CODEC DATA BROKER\n\n\n", this)
   codec.dataBroker = this;
   this.codecs.push(codec);
-
 }
+
+
 
 /**
  * removeCodec
  */
-
 DataBroker.prototype.removeCodec = function() {
-
-
   //removecodec
-
 }
+
+
 
 /**
  * addDataChannel
  */
-
 DataBroker.prototype.addDataChannel = function(dataChannel, identity) {
-
-
-  //see the UML
   var channel = {
     "identity": identity,
     "channel": dataChannel
   };
   this.channels.push(channel);
-
 }
+
+
 
 /**
  * removeDataChannel
  */
-
 DataBroker.prototype.removeDataChannel = function(identity) {
   this.channels.forEach(function(element, index, array) {
     if (element.identity == identity) array.splice(index, 1);
   });
-
   //removecodec
-
 }
+
+
 
 /**
  * send
  */
-
 DataBroker.prototype.send = function(msg) {
-
   console.log("MENSAGEM: ", msg);
   var index = -1;
   var msgObject = JSON.parse(msg);
@@ -144,8 +115,6 @@ DataBroker.prototype.send = function(msg) {
     if (index !== -1)
       this.channels[index].channel.send(msg);
   }
-
   console.log(this.channels);
   console.log(this.codecs);
-
 }

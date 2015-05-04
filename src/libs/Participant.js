@@ -8,6 +8,8 @@
  * @author Luis Oliveira <luis-f-oliveira@ptinovacao.pt>
  */
 
+
+
 /**
  * @class
  * The Participant class handles all operations needed to manage the participation of an
@@ -17,7 +19,6 @@
  *
  */
 function Participant() {
-
   this.identity = ""; // Identity of the participant
   this.RTCPeerConnection = ""; // RTCPeerConnection for that participant
   this.status = ""; // Status
@@ -31,10 +32,6 @@ function Participant() {
   this.dataBroker; // DataBroker for WebRTC DataChannel.
   this.updatedIdentities = new Array(); // For update, multy peers.
   this.updater;
-  /*********************************
-   *        PRIVATE METHODS        *
-   * TODO: try to have them accessible from other Wonder classes eg Conversation and MessagingSub but not visible from the App */
-  /*********************************/
 
   /**
    * @ignore
@@ -54,7 +51,6 @@ function Participant() {
           thisParticipant.status = status;
           console.log(thisParticipant);
           return true;
-
         }
         break;
       case ParticipantStatus.ACCEPTED:
@@ -110,7 +106,6 @@ function Participant() {
         thisParticipant.status = status;
         console.log(thisParticipant);
         return true;
-
         break;
       default:
         thisParticipant.status = status;
@@ -121,6 +116,8 @@ function Participant() {
   };
 };
 
+
+
 /**
  * Creates the local participant and initializes its resources.
  *
@@ -130,11 +127,9 @@ function Participant() {
  * @param {onMessage} msgHandler - Callback function that handles signaling Events.
  * @param {callback} callback - Callback function for success creation of the local participant.
  * @param {errorCallback} errorCallback - Callback function for errors in the creation of the local participant.
- *
  */
 
 Participant.prototype.createMyself = function(identity, resourceConstraints, rtcEvtHandler, msgHandler, callback, errorCallback) {
-
   this.identity = identity;
   this.me = this;
   this.rtcEvtHandler = rtcEvtHandler;
@@ -198,8 +193,7 @@ Participant.prototype.createMyself = function(identity, resourceConstraints, rtc
           pc.addStream(stream);
           var resource = new Resource(resourceConstraints[numbResource - 1]);
           //resource.id=stream.id;
-          resource.stream = stream; //#####firefox-test#######################
-          //resource.constraint = resourceConstraints[numbResource];
+          resource.stream = stream;
           console.log(resourceConstraints[numbResource]);
           resource.constraint.constraints = {
             id: stream.id
@@ -298,7 +292,6 @@ Participant.prototype.createMyself = function(identity, resourceConstraints, rtc
  * @param {onRTCEvt} rtcEvtHandler - Callback function that handles WebRTC Events.
  * @param {onMessage} msgHandler - Callback function that handles signaling Events.
  * @param {RTCIceServer} iceServers - Configuration parameters for ICE servers. {@link http://www.w3.org/TR/webrtc/#widl-RTCConfiguration-iceServers}
- *
  */
 
 Participant.prototype.createRemotePeer = function(identity, myParticipant, contextId, resourceConstraints, rtcEvtHandler, msgHandler, iceServers) {
