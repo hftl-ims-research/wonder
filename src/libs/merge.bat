@@ -1,4 +1,4 @@
-set coreFiles=(Idp_options.js Enums.js adapter.js helpfunctions.js Identity.js Idp.js Message.js MessageFactory.js MessagingStub.js Codec.js DataCodec.js DataMessage.js DataBroker.js)
+set coreFiles=(Idp_options.js Enums.js adapter.js helpfunctions.js Identity.js Idp.js Message.js MessageFactory.js MessagingStub.js Codec.js DataMessage.js DataBroker.js)
 set conversationFiles=(Resource.js Participant.js Conversation.js)
 
 set outCore="wonder_core.js"

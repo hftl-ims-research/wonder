@@ -1,4 +1,4 @@
-coreFiles="Idp_options.js Enums.js adapter.js helpfunctions.js Identity.js Idp.js Message.js MessageFactory.js MessagingStub.js Codec.js DataCodec.js DataMessage.js DataBroker.js"
+coreFiles="Idp_options.js Enums.js adapter.js helpfunctions.js Identity.js Idp.js Message.js MessageFactory.js MessagingStub.js Codec.js DataMessage.js DataBroker.js"
 conversationFiles="Resource.js Participant.js Conversation.js"
 
 outCore="wonder_core.js"
